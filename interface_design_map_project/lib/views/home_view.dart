@@ -43,10 +43,10 @@ class _HomeViewState extends State<HomeView> {
               ],
             ),
           ),
-          const SingleChildScrollView(
-            physics: ScrollPhysics(),
-            child: BusList(),
-          ),
+          // const SingleChildScrollView(
+          //   physics: ScrollPhysics(),
+          //   child: BusList(),
+          // ),
         ],
       ),
     );
