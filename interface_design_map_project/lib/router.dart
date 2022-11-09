@@ -21,13 +21,13 @@ class Router {
         return MaterialPageRoute(
             builder: (_) => ChangeNotifierProvider(
                   create: (context) => HomeViewModel(),
-                  child: HomeView(),
+                  child: FavoritesView(),
                 ));
       case buslineinfoRoute:
         return MaterialPageRoute(
             builder: (_) => ChangeNotifierProvider(
                   create: (context) => HomeViewModel(),
-                  child: HomeView(),
+                  child: BusLineView(),
                 ));
       default:
         return MaterialPageRoute(

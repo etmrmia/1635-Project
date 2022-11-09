@@ -6,3 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../router.dart' as LocalRouter;
 import '../constants.dart';
+
+class Bus extends ChangeNotifier {
+  int s = 0;
+}
