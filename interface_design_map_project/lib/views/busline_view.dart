@@ -26,8 +26,32 @@ class _BusLineViewState extends State<BusLineView> {
     final viewModel = Provider.of<HomeViewModel>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text("buslines"),
+        title: const Text("buslines"),
       ),
+      body: Stack(
+        children: [
+          map(viewModel),
+          Container(
+            color: Colors.white,
+            height: MediaQuery.of(context).size.height / 5,
+            alignment: Alignment.topCenter,
+            child: alertsBox(viewModel),
+          ),
+        ],
+      ),
+    );
+  }
+
+  map(HomeViewModel vm) {
+    return Container(
+      color: Colors.amberAccent,
+    );
+  }
+
+  alertsBox(HomeViewModel vm) {
+    return Container(
+      margin: const EdgeInsets.all(10),
+      child: const Text("Alerts"),
     );
   }
 }

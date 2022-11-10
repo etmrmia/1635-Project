@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import '../constants.dart';
 import 'busline_view.dart';
@@ -35,16 +36,27 @@ class _HomeViewState extends State<HomeView> {
     final viewModel = Provider.of<HomeViewModel>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Bus App"),
+        title: const Text("Bus App"),
       ),
       body: Stack(
         children: [
-          Container(
-            color: Colors.amberAccent,
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
+          map(viewModel),
+          NestedScrollView(
+            floatHeaderSlivers: true,
+            headerSliverBuilder:
+                (BuildContext context, bool innerBoxIsScrolled) {
+              return <Widget>[
+                SliverAppBar(
+                  floating: true,
+                  expandedHeight: MediaQuery.of(context).size.height / 2,
+                  //collapsedHeight: MediaQuery.of(context).size.height / 4,
+                  forceElevated: innerBoxIsScrolled,
+                  backgroundColor: Colors.transparent,
+                ),
+              ];
+            },
+            body: Container(
+              padding: const EdgeInsets.only(bottom: 20),
               height: MediaQuery.of(context).size.height / 2,
               decoration: const BoxDecoration(
                 color: Colors.white,
@@ -59,57 +71,8 @@ class _HomeViewState extends State<HomeView> {
               ),
               child: Column(
                 children: [
-                  Container(
-                    margin: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-                    child: TextFormField(
-                      controller: _starting,
-                      decoration: const InputDecoration(
-                        labelText: "Starting",
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blue),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.grey,
-                            width: 1,
-                          ),
-                        ),
-                        contentPadding:
-                            EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 8),
-                    child: TextFormField(
-                      controller: _destination,
-                      textInputAction: TextInputAction.send,
-                      decoration: const InputDecoration(
-                        labelText: "Destination",
-                        focusedBorder: OutlineInputBorder(
-                          //borderRadius: BorderRadius.circular(25),
-                          borderSide: BorderSide(color: Colors.blue),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          // borderRadius: BorderRadius.circular(25),
-                          borderSide: BorderSide(
-                            color: Colors.grey,
-                            width: 1,
-                          ),
-                        ),
-                        contentPadding:
-                            EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                      ),
-                      onFieldSubmitted: (value) {
-                        setState(() {
-                          if (_destination.text.isNotEmpty) {
-                            _destination.clear();
-                            _starting.clear();
-                          }
-                        });
-                      },
-                    ),
-                  ),
+                  startSearch(viewModel, _starting),
+                  destinationSearch(viewModel, _starting, _destination),
                   Container(
                     margin: const EdgeInsets.symmetric(vertical: 8),
                     child: const Text(
@@ -118,66 +81,134 @@ class _HomeViewState extends State<HomeView> {
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      physics: const ScrollPhysics(),
-                      child: Container(
-                        height: MediaQuery.of(context).size.height / 2,
-                        child: ListView.builder(
-                          itemCount: viewModel.buses.length,
-                          itemBuilder: (context, index) {
-                            final favorited = viewModel.favorites
-                                .contains(viewModel.buses[index]);
-                            return ListTile(
-                              title: Text(
-                                viewModel.buses[index],
-                              ),
-                              trailing: GestureDetector(
-                                child: Icon(
-                                  favorited
-                                      ? Icons.favorite
-                                      : Icons.favorite_border,
-                                  color: favorited ? Colors.red : null,
-                                  semanticLabel:
-                                      favorited ? 'Remove from saved' : 'Save',
-                                ),
-                                onTap: () {
-                                  setState(() {
-                                    if (favorited) {
-                                      viewModel.favorites
-                                          .remove(viewModel.buses[index]);
-                                    } else {
-                                      viewModel.favorites
-                                          .add(viewModel.buses[index]);
-                                    }
-                                  });
-                                },
-                              ),
-                              onTap: () {
-                                Navigator.pushNamed(context, buslineinfoRoute);
-                              },
-                            );
-                          },
-                        ),
-                      ),
-                    ),
-                  ),
+                  busList(context, viewModel),
                 ],
               ),
             ),
           ),
           Align(
-            alignment: const FractionalOffset(.97, 0.01),
+            alignment: const FractionalOffset(.97, 0.02),
             child: Container(
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, favoritesRoute);
-                },
-                child: const Icon(Icons.favorite),
-              ),
+              child: favoritesViewButton(context),
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  map(HomeViewModel vm) {
+    return Container(
+      color: Colors.lightGreen,
+    );
+  }
+
+  favoritesViewButton(BuildContext context) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        fixedSize: const Size(55, 55),
+        shape: const CircleBorder(),
+      ),
+      onPressed: () {
+        Navigator.pushNamed(context, favoritesRoute);
+      },
+      child: const Icon(Icons.favorite),
+    );
+  }
+
+  startSearch(HomeViewModel vm, TextEditingController controller) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+      child: TextFormField(
+        controller: controller,
+        decoration: const InputDecoration(
+          labelText: "Starting",
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.blue),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.grey,
+              width: 1,
+            ),
+          ),
+          contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+        ),
+      ),
+    );
+  }
+
+  destinationSearch(HomeViewModel vm, TextEditingController start,
+      TextEditingController dest) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 8),
+      child: TextFormField(
+        controller: dest,
+        textInputAction: TextInputAction.send,
+        decoration: const InputDecoration(
+          labelText: "Destination",
+          focusedBorder: OutlineInputBorder(
+            //borderRadius: BorderRadius.circular(25),
+            borderSide: BorderSide(color: Colors.blue),
+          ),
+          enabledBorder: OutlineInputBorder(
+            // borderRadius: BorderRadius.circular(25),
+            borderSide: BorderSide(
+              color: Colors.grey,
+              width: 1,
+            ),
+          ),
+          contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+        ),
+        onFieldSubmitted: (value) {
+          setState(() {
+            if (dest.text.isNotEmpty) {
+              dest.clear();
+              start.clear();
+              Navigator.pushNamed(context, buslineinfoRoute);
+            }
+          });
+        },
+      ),
+    );
+  }
+
+  busList(BuildContext context, HomeViewModel vm) {
+    return Expanded(
+      child: SingleChildScrollView(
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height / 2,
+          child: ListView.builder(
+            itemCount: vm.buses.length,
+            itemBuilder: (context, index) {
+              final favorited = vm.favorites.contains(vm.buses[index]);
+              return ListTile(
+                title: Text(
+                  vm.buses[index],
+                ),
+                trailing: GestureDetector(
+                  child: Icon(
+                    favorited ? Icons.favorite : Icons.favorite_border,
+                    color: favorited ? Colors.red : null,
+                    semanticLabel: favorited ? 'Remove from saved' : 'Save',
+                  ),
+                  onTap: () {
+                    setState(() {
+                      if (favorited) {
+                        vm.favorites.remove(vm.buses[index]);
+                      } else {
+                        vm.favorites.add(vm.buses[index]);
+                      }
+                    });
+                  },
+                ),
+                onTap: () {
+                  Navigator.pushNamed(context, buslineinfoRoute);
+                },
+              );
+            },
+          ),
+        ),
       ),
     );
   }

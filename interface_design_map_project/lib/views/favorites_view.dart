@@ -15,6 +15,8 @@ class FavoritesView extends StatefulWidget {
 }
 
 class _FavoritesViewState extends State<FavoritesView> {
+  final _busLine = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -22,30 +24,70 @@ class _FavoritesViewState extends State<FavoritesView> {
   }
 
   @override
+  void dispose() {
+    _busLine.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final viewModel = Provider.of<HomeViewModel>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Favorites"),
+        title: const Text("Favorites"),
       ),
-      body: SingleChildScrollView(
-        physics: const ScrollPhysics(),
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          child: ListView.builder(
-            itemCount: viewModel.favorites.length,
-            itemBuilder: (context, index) {
-              final favorited = true;
-              return ListTile(
-                title: Text(
-                  viewModel.favorites[index],
-                ),
-                onTap: () {
-                  Navigator.pushNamed(context, buslineinfoRoute);
-                },
-              );
+      body: Column(
+        children: [
+          busLineSearch(viewModel, _busLine),
+          favoritesList(context, viewModel),
+        ],
+      ),
+    );
+  }
+
+  favoritesList(BuildContext context, HomeViewModel viewModel) {
+    return Expanded(
+      // child: SingleChildScrollView(
+      //   physics: const ScrollPhysics(),
+      //   child: SizedBox(
+      //     height: MediaQuery.of(context).size.height,
+      //     child:
+      child: ListView.builder(
+        itemCount: viewModel.favorites.length,
+        itemBuilder: (context, index) {
+          final favorited = true;
+          return ListTile(
+            title: Text(
+              viewModel.favorites[index],
+            ),
+            onTap: () {
+              Navigator.pushNamed(context, buslineinfoRoute);
             },
+          );
+        },
+      ),
+      //   ),
+      // ),
+    );
+  }
+
+  busLineSearch(HomeViewModel vm, TextEditingController line) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+      child: TextFormField(
+        controller: line,
+        decoration: const InputDecoration(
+          labelText: "Bus Line",
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.blue),
           ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.grey,
+              width: 1,
+            ),
+          ),
+          contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
         ),
       ),
     );

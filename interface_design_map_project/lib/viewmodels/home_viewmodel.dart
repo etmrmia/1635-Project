@@ -8,6 +8,26 @@ import '../router.dart' as LocalRouter;
 import '../constants.dart';
 
 class HomeViewModel extends ChangeNotifier {
-  List<String> buses = <String>["bus1", "bus2", "bus3", "bus4"];
+  List<String> buses = <String>[
+    "bus1",
+    "bus2",
+    "bus3",
+    "bus4",
+    "bus5",
+    "bus6",
+    "bus7",
+    "bus8",
+    "bus9",
+    "bus10",
+    "bus11",
+    "bus12",
+    "bus13",
+    "bus14",
+    "bus15",
+    "bus16",
+    "bus17",
+    "bus18",
+    "bus19"
+  ];
   List<String> favorites = <String>["favorite1"];
 }
