@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 /*import '../router.dart' as LocalRouter;
 import '../constants.dart';
 
-<<<<<<< HEAD
 class HomeViewModel extends StatefulWidget {
   const HomeViewModel({super.key});
 
@@ -53,8 +52,4 @@ class HomeViewModel extends ChangeNotifier {
     _myList.remove(bus);
     notifyListeners();
   }
-=======
-class HomeViewModel extends ChangeNotifier {
-  List<String> buses = <String>[];
->>>>>>> 7a946a5f07927a553c2fd80229e3b874b14e83d7
 }
