@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:interface_design_map_project/viewmodels/home_viewmodel.dart';
 import 'views/busline_view.dart';
 import 'views/favorites_view.dart';
 import 'views/home_view.dart';
@@ -22,9 +23,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: ChangeNotifierProvider(
-          create: (context) =>
-        );
+        home: ChangeNotifierProvider(create: (context) => HomeViewModel()));
   }
 }
 

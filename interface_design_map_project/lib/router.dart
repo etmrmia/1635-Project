@@ -29,6 +29,12 @@ class Router {
                   create: (context) => HomeViewModel(),
                   child: HomeView(),
                 ));
+      default:
+        return MaterialPageRoute(
+            builder: (_) => Scaffold(
+                  body: Center(
+                      child: Text('No route defined for ${settings.name}')),
+                ));
     }
   }
 }
