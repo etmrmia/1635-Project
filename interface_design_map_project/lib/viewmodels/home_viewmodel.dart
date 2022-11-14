@@ -52,4 +52,15 @@ class HomeViewModel extends ChangeNotifier {
     _myList.remove(bus);
     notifyListeners();
   }
+
+  //Is the return value displayed at the top of screen?
+  String routes(String src, String dest) {
+    if (src == "University of Pittsburgh" && dest == "Kennywood") {
+      return "61C McKeesport";
+    } else if (src == "Wood & Sixth" && dest == "CCAC South") {
+      return "Y49 Prospect Flyer";
+    } else {
+      return "Sorry, no route exists.";
+    }
+  }
 }
