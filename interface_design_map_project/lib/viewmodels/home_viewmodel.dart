@@ -29,5 +29,20 @@ class HomeViewModel extends ChangeNotifier {
     "bus18",
     "bus19"
   ];
-  List<String> favorites = <String>["favorite1"];
+  List<String> favorites = <String>["favorite1", "favorite2", "favorite3"];
+  ValueNotifier<int> favLen = ValueNotifier<int>(2);
+
+  addFavorite(String favorite) {
+    favorites.add(favorite);
+    print("adding " + favorite);
+    for (int i = 0; i < favorites.length; i++) print(favorites[i]);
+    notifyListeners();
+  }
+
+  removeFavorite(String favorite) {
+    favorites.remove(favorite);
+    print("removing " + favorite);
+    for (int i = 0; i < favorites.length; i++) print(favorites[i]);
+    notifyListeners();
+  }
 }

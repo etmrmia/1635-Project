@@ -39,35 +39,31 @@ class _FavoritesViewState extends State<FavoritesView> {
       body: Column(
         children: [
           busLineSearch(viewModel, _busLine),
-          favoritesList(context, viewModel),
+          Expanded(child: favoritesList(context)),
         ],
       ),
     );
   }
 
-  favoritesList(BuildContext context, HomeViewModel viewModel) {
-    return Expanded(
-      // child: SingleChildScrollView(
-      //   physics: const ScrollPhysics(),
-      //   child: SizedBox(
-      //     height: MediaQuery.of(context).size.height,
-      //     child:
-      child: ListView.builder(
-        itemCount: viewModel.favorites.length,
-        itemBuilder: (context, index) {
-          final favorited = true;
-          return ListTile(
-            title: Text(
-              viewModel.favorites[index],
-            ),
-            onTap: () {
-              Navigator.pushNamed(context, buslineinfoRoute);
-            },
-          );
-        },
-      ),
-      //   ),
-      // ),
+  favoritesList(BuildContext context) {
+    return Consumer<HomeViewModel>(
+      builder: (context, vm, _) {
+        List<String> favorites = vm.favorites;
+        return ListView.builder(
+          itemCount: favorites.length,
+          itemBuilder: (context, index) {
+            // final favorited = true;
+            return ListTile(
+              title: Text(
+                favorites[index],
+              ),
+              onTap: () {
+                Navigator.pushNamed(context, buslineinfoRoute);
+              },
+            );
+          },
+        );
+      },
     );
   }
 
@@ -89,6 +85,13 @@ class _FavoritesViewState extends State<FavoritesView> {
           ),
           contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
         ),
+        onFieldSubmitted: (value) {
+          if (value.isNotEmpty) {
+            vm.addFavorite(value);
+            line.clear();
+            setState(() {});
+          }
+        },
       ),
     );
   }

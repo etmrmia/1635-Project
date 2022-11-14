@@ -49,7 +49,6 @@ class _HomeViewState extends State<HomeView> {
                 SliverAppBar(
                   floating: true,
                   expandedHeight: MediaQuery.of(context).size.height / 2,
-                  //collapsedHeight: MediaQuery.of(context).size.height / 4,
                   forceElevated: innerBoxIsScrolled,
                   backgroundColor: Colors.transparent,
                 ),
@@ -81,7 +80,9 @@ class _HomeViewState extends State<HomeView> {
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  busList(context, viewModel),
+                  Expanded(
+                    child: busList(context, viewModel),
+                  ),
                 ],
               ),
             ),
@@ -110,7 +111,9 @@ class _HomeViewState extends State<HomeView> {
         shape: const CircleBorder(),
       ),
       onPressed: () {
-        Navigator.pushNamed(context, favoritesRoute);
+        // Navigator.of(context).pushNamed(favoritesRoute);
+        Navigator.pushNamed(context, favoritesRoute)
+            .then((_) => setState(() {}));
       },
       child: const Icon(Icons.favorite),
     );
@@ -173,41 +176,42 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-  busList(BuildContext context, HomeViewModel vm) {
-    return Expanded(
-      child: SingleChildScrollView(
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height / 2,
-          child: ListView.builder(
-            itemCount: vm.buses.length,
-            itemBuilder: (context, index) {
-              final favorited = vm.favorites.contains(vm.buses[index]);
-              return ListTile(
-                title: Text(
-                  vm.buses[index],
-                ),
-                trailing: GestureDetector(
-                  child: Icon(
-                    favorited ? Icons.favorite : Icons.favorite_border,
-                    color: favorited ? Colors.red : null,
-                    semanticLabel: favorited ? 'Remove from saved' : 'Save',
-                  ),
-                  onTap: () {
-                    setState(() {
-                      if (favorited) {
-                        vm.favorites.remove(vm.buses[index]);
-                      } else {
-                        vm.favorites.add(vm.buses[index]);
-                      }
-                    });
-                  },
+  busList(
+    BuildContext context,
+    HomeViewModel vm,
+  ) {
+    return SingleChildScrollView(
+      child: SizedBox(
+        height: MediaQuery.of(context).size.height / 2,
+        child: ListView.builder(
+          itemCount: vm.buses.length,
+          itemBuilder: (context, index) {
+            final favorited = vm.favorites.contains(vm.buses[index]);
+            return ListTile(
+              title: Text(
+                vm.buses[index],
+              ),
+              trailing: GestureDetector(
+                child: Icon(
+                  favorited ? Icons.favorite : Icons.favorite_border,
+                  color: favorited ? Colors.red : null,
+                  semanticLabel: favorited ? 'Remove from saved' : 'Save',
                 ),
                 onTap: () {
-                  Navigator.pushNamed(context, buslineinfoRoute);
+                  setState(() {
+                    if (favorited) {
+                      vm.removeFavorite(vm.buses[index]);
+                    } else {
+                      vm.addFavorite(vm.buses[index]);
+                    }
+                  });
                 },
-              );
-            },
-          ),
+              ),
+              onTap: () {
+                Navigator.pushNamed(context, buslineinfoRoute);
+              },
+            );
+          },
         ),
       ),
     );
