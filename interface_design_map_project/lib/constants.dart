@@ -1,4 +1,4 @@
 // routing constants
 const String homeRoute = '/';
-const String favoritesRoute = '/';
-const String buslineinfoRoute = '/';
+const String favoritesRoute = '/views/favorites_view';
+const String buslineinfoRoute = '/views/busline_view';

@@ -1,9 +1,11 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import '../constants.dart';
 import 'busline_view.dart';
 import 'favorites_view.dart';
 import 'home_view.dart';
 import '../viewmodels/home_viewmodel.dart';
+import '../models/bus.dart';
 import '../router.dart';
 import 'package:provider/provider.dart';
 
@@ -13,7 +15,8 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  final TextEditingController _controller = TextEditingController();
+  final _starting = TextEditingController();
+  final _destination = TextEditingController();
 
   @override
   void initState() {
@@ -22,88 +25,196 @@ class _HomeViewState extends State<HomeView> {
   }
 
   @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    _starting.dispose();
+    _destination.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final viewModel = Provider.of<HomeViewModel>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Bus App"),
+        title: const Text("Bus App"),
       ),
-      body: Column(
+      body: Stack(
         children: [
-          Container(
-            color: Colors.amberAccent,
-            height: 400,
-          ),
-          Container(
-            child: Column(
-              children: const [
-                TextField(),
-                TextField(),
-                Text("Nearest buses"),
-              ],
+          map(viewModel),
+          NestedScrollView(
+            floatHeaderSlivers: true,
+            headerSliverBuilder:
+                (BuildContext context, bool innerBoxIsScrolled) {
+              return <Widget>[
+                SliverAppBar(
+                  floating: true,
+                  expandedHeight: MediaQuery.of(context).size.height / 2,
+                  forceElevated: innerBoxIsScrolled,
+                  backgroundColor: Colors.transparent,
+                ),
+              ];
+            },
+            body: Container(
+              padding: const EdgeInsets.only(bottom: 20),
+              height: MediaQuery.of(context).size.height / 2,
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey,
+                    blurRadius: 9,
+                    spreadRadius: 3,
+                    offset: Offset(5, 5),
+                  ),
+                ],
+              ),
+              child: Column(
+                children: [
+                  startSearch(viewModel, _starting),
+                  destinationSearch(viewModel, _starting, _destination),
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 8),
+                    child: const Text(
+                      "Buses",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Expanded(
+                    child: busList(context, viewModel),
+                  ),
+                ],
+              ),
             ),
           ),
-          // const SingleChildScrollView(
-          //   physics: ScrollPhysics(),
-          //   child: BusList(),
-          // ),
+          Align(
+            alignment: const FractionalOffset(.97, 0.02),
+            child: Container(
+              child: favoritesViewButton(context),
+            ),
+          ),
         ],
       ),
     );
   }
-}
 
-class BusList extends StatefulWidget {
-  const BusList({super.key});
-
-  @override
-  State<BusList> createState() => _BusListState();
-}
-
-class _BusListState extends State<BusList> {
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: 10,
-      itemBuilder: /*1*/ (context, i) {
-        if (i.isOdd) return const Divider(); /*2*/
-
-        final index = i ~/ 2; /*3*/
-        if (index >= viewModel.buses.length) {
-          _suggestions.addAll(generateWordPairs().take(10));
-        }
-
-        final alreadySaved = _saved.contains(_suggestions[index]);
-        if (index >= _suggestions.length) {
-          _suggestions.addAll(generateWordPairs().take(10)); /*4*/
-        }
-        return ListTile(
-          title: Text(
-            _suggestions[index].asPascalCase,
-            style: _biggerFont,
-          ),
-          trailing: GestureDetector(
-            child: Icon(
-              alreadySaved ? Icons.favorite : Icons.favorite_border,
-              color: alreadySaved ? Colors.red : null,
-              semanticLabel: alreadySaved ? 'Remove from saved' : 'Save',
-            ),
-            onTap: () {
-              setState(() {
-                if (alreadySaved) {
-                  _saved.remove(_suggestions[index]);
-                } else {
-                  _saved.add(_suggestions[index]);
-                }
-              });
-            },
-          ),
-          onTap: () {
-            Navigator.pushNamed(context, '/new');
-          },
-        );
-      },
+  map(HomeViewModel vm) {
+    return Container(
+      color: Colors.lightGreen,
     );
-    ;
+  }
+
+  favoritesViewButton(BuildContext context) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        fixedSize: const Size(55, 55),
+        shape: const CircleBorder(),
+      ),
+      onPressed: () {
+        // Navigator.of(context).pushNamed(favoritesRoute);
+        Navigator.pushNamed(context, favoritesRoute)
+            .then((_) => setState(() {}));
+      },
+      child: const Icon(Icons.favorite),
+    );
+  }
+
+  startSearch(HomeViewModel vm, TextEditingController controller) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+      child: TextFormField(
+        controller: controller,
+        decoration: const InputDecoration(
+          labelText: "Starting",
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.blue),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.grey,
+              width: 1,
+            ),
+          ),
+          contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+        ),
+      ),
+    );
+  }
+
+  destinationSearch(HomeViewModel vm, TextEditingController start,
+      TextEditingController dest) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 8),
+      child: TextFormField(
+        controller: dest,
+        textInputAction: TextInputAction.send,
+        decoration: const InputDecoration(
+          labelText: "Destination",
+          focusedBorder: OutlineInputBorder(
+            //borderRadius: BorderRadius.circular(25),
+            borderSide: BorderSide(color: Colors.blue),
+          ),
+          enabledBorder: OutlineInputBorder(
+            // borderRadius: BorderRadius.circular(25),
+            borderSide: BorderSide(
+              color: Colors.grey,
+              width: 1,
+            ),
+          ),
+          contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+        ),
+        onFieldSubmitted: (value) {
+          setState(() {
+            if (dest.text.isNotEmpty) {
+              dest.clear();
+              start.clear();
+              Navigator.pushNamed(context, buslineinfoRoute);
+            }
+          });
+        },
+      ),
+    );
+  }
+
+  busList(
+    BuildContext context,
+    HomeViewModel vm,
+  ) {
+    List<Bus> listOfBuses = vm.buses;
+    List<Bus> favorites = vm.myList;
+    return SingleChildScrollView(
+      child: SizedBox(
+        height: MediaQuery.of(context).size.height / 2,
+        child: ListView.builder(
+          itemCount: vm.buses.length,
+          itemBuilder: (context, index) {
+            final favorited = favorites.contains(listOfBuses[index]);
+            return ListTile(
+              title: Text(listOfBuses[index].title),
+              trailing: GestureDetector(
+                child: Icon(
+                  favorited ? Icons.favorite : Icons.favorite_border,
+                  color: favorited ? Colors.red : null,
+                  semanticLabel: favorited ? 'Remove from saved' : 'Save',
+                ),
+                onTap: () {
+                  setState(() {
+                    if (favorited) {
+                      vm.addToList(listOfBuses[index]);
+                    } else {
+                      vm.removeFromList(listOfBuses[index]);
+                    }
+                  });
+                },
+              ),
+              onTap: () {
+                Navigator.pushNamed(context, buslineinfoRoute);
+              },
+            );
+          },
+        ),
+      ),
+    );
   }
 }
