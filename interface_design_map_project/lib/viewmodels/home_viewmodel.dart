@@ -29,7 +29,7 @@ final List<Bus> initialData = List.generate(
         //Have to figure out a way to individualize alerts
         Bus(title: "7$index" "C", alert: "On time."));
 
-class HomeViewModel extends ChangeNotifier {
+class HomeViewModel with ChangeNotifier {
   Bus bus61C = Bus(title: "61C McKeesport", alert: "on-time");
   Bus busY49 = Bus(title: "Y49 Prospect Flyer", alert: "delayed");
   Bus noBus = Bus(title: "N/A", alert: "n/a");
@@ -40,20 +40,33 @@ class HomeViewModel extends ChangeNotifier {
   List<Bus> get buses => _buses;
 
   // Favorite buses
-  final List<Bus> _myList = [];
+  final List<Bus> _myList = [
+    Bus(alert: "test1", title: "test1"),
+    Bus(alert: "test2", title: "test2")
+  ];
 
   // Retrieve favorite buses
   List<Bus> get myList => _myList;
 
   // Adding a bus to the favorites list
   void addToList(Bus bus) {
+    print("adding " + bus.title);
     _myList.add(bus);
+    print("my fave list: ");
+    for (int i = 0; i < myList.length; i++) {
+      print(myList[i].title);
+    }
     notifyListeners();
   }
 
   // Removing a bus from the favorites list
   void removeFromList(Bus bus) {
+    print("removing " + bus.title);
     _myList.remove(bus);
+    print("my fave list: ");
+    for (int i = 0; i < myList.length; i++) {
+      print(myList[i].title);
+    }
     notifyListeners();
   }
 

@@ -34,7 +34,8 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = Provider.of<HomeViewModel>(context);
+    // final viewModel = Provider.of<HomeViewModel>(context);
+    var viewModel = context.read<HomeViewModel>();
     // Home Page
     return Scaffold(
       appBar: AppBar(
@@ -122,11 +123,11 @@ class _HomeViewState extends State<HomeView> {
         fixedSize: const Size(55, 55),
         shape: const CircleBorder(),
       ),
-      onPressed: (() => _pushSaved(vm)),
-      // onPressed: () {
-      //   // Navigator.of(context).pushNamed(favoritesRoute);
-      //   Navigator.pushNamed(context, favoritesRoute);
-      // },
+      // onPressed:
+      onPressed: () {
+        // Navigator.of(context).pushNamed(favoritesRoute);
+        Navigator.pushNamed(context, favoritesRoute);
+      },
       child: const Icon(Icons.favorite),
     );
   }
@@ -179,9 +180,12 @@ class _HomeViewState extends State<HomeView> {
         onFieldSubmitted: (value) {
           setState(() {
             if (_destination.text.isNotEmpty) {
+              print("Start from " + _starting.text);
+              print("Go to " + _destination.text);
+              print(vm.routes(_starting.text, _destination.text).title);
               _destination.clear();
               _starting.clear();
-              Navigator.pushNamed(context, buslineinfoRoute);
+              //Navigator.pushNamed(context, buslineinfoRoute);
             }
           });
         },
@@ -225,35 +229,6 @@ class _HomeViewState extends State<HomeView> {
             );
           },
         ),
-      ),
-    );
-  }
-
-  void _pushSaved(HomeViewModel vm) {
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(
-        builder: (context) {
-          final tiles = vm.myList.map(
-            (pair) {
-              return ListTile(
-                title: Text(pair.title),
-              );
-            },
-          );
-          final divided = tiles.isNotEmpty
-              ? ListTile.divideTiles(
-                  context: context,
-                  tiles: tiles,
-                ).toList()
-              : <Widget>[];
-
-          return Scaffold(
-            appBar: AppBar(
-              title: const Text('Favorites'),
-            ),
-            body: ListView(children: divided),
-          );
-        },
       ),
     );
   }

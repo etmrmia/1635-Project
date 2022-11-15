@@ -13,21 +13,21 @@ class Router {
     switch (settings.name) {
       case homeRoute:
         return MaterialPageRoute(
-            builder: (_) => ChangeNotifierProvider(
+            builder: (_) => ChangeNotifierProvider<HomeViewModel>(
                   create: (context) => HomeViewModel(),
                   child: HomeView(),
                 ));
       case favoritesRoute:
         return MaterialPageRoute(
-            builder: (_) => ChangeNotifierProvider(
+            builder: (_) => ChangeNotifierProvider<HomeViewModel>(
                   create: (context) => HomeViewModel(),
-                  child: FavoritesView(),
+                  child: const FavoritesView(),
                 ));
       case buslineinfoRoute:
         return MaterialPageRoute(
-            builder: (_) => ChangeNotifierProvider(
+            builder: (_) => ChangeNotifierProvider<HomeViewModel>(
                   create: (context) => HomeViewModel(),
-                  child: BusLineView(),
+                  child: const BusLineView(),
                 ));
       default:
         return MaterialPageRoute(
