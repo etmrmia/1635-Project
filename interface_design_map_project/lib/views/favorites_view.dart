@@ -39,24 +39,26 @@ class _FavoritesViewState extends State<FavoritesView> {
       ),
       body: Column(
         children: [
-          busLineSearch(viewModel, _busLine),
-          Expanded(child: favoritesList(context)),
+          // Search for bus line
+          busLineSearch(viewModel),
+          // Display favorites list
+          Expanded(child: favoritesList()),
         ],
       ),
     );
   }
 
-  favoritesList(BuildContext context) {
+  // Display list of favorites method
+  favoritesList() {
     return Consumer<HomeViewModel>(
       builder: (context, vm, _) {
-        List<Bus> favorites = vm.myList;
         return ListView.builder(
-          itemCount: favorites.length,
+          itemCount: vm.myList.length,
           itemBuilder: (context, index) {
             // final favorited = true;
             return ListTile(
               title: Text(
-                favorites[index].title,
+                vm.myList[index].title,
               ),
               onTap: () {
                 Navigator.pushNamed(context, buslineinfoRoute);
@@ -68,12 +70,13 @@ class _FavoritesViewState extends State<FavoritesView> {
     );
   }
 
-  busLineSearch(HomeViewModel vm, TextEditingController line) {
+  // Search by busline method
+  busLineSearch(HomeViewModel vm) {
     List<Bus> listOfBuses = vm.buses;
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
       child: TextFormField(
-        controller: line,
+        controller: _busLine,
         decoration: const InputDecoration(
           labelText: "Bus Line",
           focusedBorder: OutlineInputBorder(
@@ -94,7 +97,7 @@ class _FavoritesViewState extends State<FavoritesView> {
                 vm.addToList(listOfBuses[i]);
               }
             }
-            line.clear();
+            _busLine.clear();
             setState(() {});
           }
         },

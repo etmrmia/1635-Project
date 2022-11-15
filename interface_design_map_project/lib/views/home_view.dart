@@ -35,12 +35,14 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     final viewModel = Provider.of<HomeViewModel>(context);
+    // Home Page
     return Scaffold(
       appBar: AppBar(
         title: const Text("Bus App"),
       ),
       body: Stack(
         children: [
+          // Display map
           map(viewModel),
           NestedScrollView(
             floatHeaderSlivers: true,
@@ -55,6 +57,7 @@ class _HomeViewState extends State<HomeView> {
                 ),
               ];
             },
+            // Information Section
             body: Container(
               padding: const EdgeInsets.only(bottom: 20),
               height: MediaQuery.of(context).size.height / 2,
@@ -71,8 +74,10 @@ class _HomeViewState extends State<HomeView> {
               ),
               child: Column(
                 children: [
-                  startSearch(viewModel, _starting),
-                  destinationSearch(viewModel, _starting, _destination),
+                  // Search Bars
+                  startSearch(viewModel),
+                  destinationSearch(viewModel),
+                  // Bus List
                   Container(
                     margin: const EdgeInsets.symmetric(vertical: 8),
                     child: const Text(
@@ -88,10 +93,11 @@ class _HomeViewState extends State<HomeView> {
               ),
             ),
           ),
+          // Favorites Button
           Align(
             alignment: const FractionalOffset(.97, 0.02),
             child: Container(
-              child: favoritesViewButton(context),
+              child: favoritesViewButton(context, viewModel),
             ),
           ),
         ],
@@ -99,32 +105,38 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
+// Display map method
   map(HomeViewModel vm) {
     return Container(
-      color: Colors.lightGreen,
+      color: Colors.yellow,
+      // child: const Image(
+      //   image: AssetImage('assets/images/CCAC.png'),
+      // ),
     );
   }
 
-  favoritesViewButton(BuildContext context) {
+// Display favorites button
+  favoritesViewButton(BuildContext context, HomeViewModel vm) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         fixedSize: const Size(55, 55),
         shape: const CircleBorder(),
       ),
-      onPressed: () {
-        // Navigator.of(context).pushNamed(favoritesRoute);
-        Navigator.pushNamed(context, favoritesRoute)
-            .then((_) => setState(() {}));
-      },
+      onPressed: (() => _pushSaved(vm)),
+      // onPressed: () {
+      //   // Navigator.of(context).pushNamed(favoritesRoute);
+      //   Navigator.pushNamed(context, favoritesRoute);
+      // },
       child: const Icon(Icons.favorite),
     );
   }
 
-  startSearch(HomeViewModel vm, TextEditingController controller) {
+// Starting location search
+  startSearch(HomeViewModel vm) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
       child: TextFormField(
-        controller: controller,
+        controller: _starting,
         decoration: const InputDecoration(
           labelText: "Starting",
           focusedBorder: OutlineInputBorder(
@@ -142,12 +154,12 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-  destinationSearch(HomeViewModel vm, TextEditingController start,
-      TextEditingController dest) {
+// Destination search
+  destinationSearch(HomeViewModel vm) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 8),
       child: TextFormField(
-        controller: dest,
+        controller: _destination,
         textInputAction: TextInputAction.send,
         decoration: const InputDecoration(
           labelText: "Destination",
@@ -166,9 +178,9 @@ class _HomeViewState extends State<HomeView> {
         ),
         onFieldSubmitted: (value) {
           setState(() {
-            if (dest.text.isNotEmpty) {
-              dest.clear();
-              start.clear();
+            if (_destination.text.isNotEmpty) {
+              _destination.clear();
+              _starting.clear();
               Navigator.pushNamed(context, buslineinfoRoute);
             }
           });
@@ -177,21 +189,20 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
+// Display list of buses
   busList(
     BuildContext context,
     HomeViewModel vm,
   ) {
-    List<Bus> listOfBuses = vm.buses;
-    List<Bus> favorites = vm.myList;
     return SingleChildScrollView(
       child: SizedBox(
         height: MediaQuery.of(context).size.height / 2,
         child: ListView.builder(
           itemCount: vm.buses.length,
           itemBuilder: (context, index) {
-            final favorited = favorites.contains(listOfBuses[index]);
+            final favorited = vm.myList.contains(vm.buses[index]);
             return ListTile(
-              title: Text(listOfBuses[index].title),
+              title: Text(vm.buses[index].title),
               trailing: GestureDetector(
                 child: Icon(
                   favorited ? Icons.favorite : Icons.favorite_border,
@@ -201,9 +212,9 @@ class _HomeViewState extends State<HomeView> {
                 onTap: () {
                   setState(() {
                     if (favorited) {
-                      vm.addToList(listOfBuses[index]);
+                      vm.removeFromList(vm.buses[index]);
                     } else {
-                      vm.removeFromList(listOfBuses[index]);
+                      vm.addToList(vm.buses[index]);
                     }
                   });
                 },
@@ -214,6 +225,35 @@ class _HomeViewState extends State<HomeView> {
             );
           },
         ),
+      ),
+    );
+  }
+
+  void _pushSaved(HomeViewModel vm) {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (context) {
+          final tiles = vm.myList.map(
+            (pair) {
+              return ListTile(
+                title: Text(pair.title),
+              );
+            },
+          );
+          final divided = tiles.isNotEmpty
+              ? ListTile.divideTiles(
+                  context: context,
+                  tiles: tiles,
+                ).toList()
+              : <Widget>[];
+
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text('Favorites'),
+            ),
+            body: ListView(children: divided),
+          );
+        },
       ),
     );
   }
