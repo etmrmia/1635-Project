@@ -22,6 +22,9 @@ class _HomeViewModelState extends State<HomeViewModel> {
   }
 }*/
 
+
+
+
 //Dummy data
 final List<Bus> initialData = List.generate(
     3,
@@ -30,6 +33,11 @@ final List<Bus> initialData = List.generate(
         Bus(title: "7$index" "C", alert: "On time."));
 
 class HomeViewModel extends ChangeNotifier {
+
+  Bus bus61C = Bus(title: "61C McKeesport", alert: "on-time");
+  Bus busY49= Bus(title:"Y49 Prospect Flyer", alert: "delayed");
+  Bus noBus = Bus(title: "N/A", alert: "n/a");
+
   final List<Bus> _buses = initialData;
 
   // Retrieve all buses
@@ -54,13 +62,23 @@ class HomeViewModel extends ChangeNotifier {
   }
 
   //Is the return value displayed at the top of screen?
-  String routes(String src, String dest) {
+  // String routes(String src, String dest) {
+  //   if (src == "University of Pittsburgh" && dest == "Kennywood") {
+  //     return bus61C.title;
+  //   } else if (src == "Wood & Sixth" && dest == "CCAC South") {
+  //     return "Y49 Prospect Flyer";
+  //   } else {
+  //     return "Sorry, no route exists.";
+  //   }
+  // }
+
+   Bus routes(String src, String dest) {
     if (src == "University of Pittsburgh" && dest == "Kennywood") {
-      return "61C McKeesport";
+      return bus61C;
     } else if (src == "Wood & Sixth" && dest == "CCAC South") {
-      return "Y49 Prospect Flyer";
+      return busY49;
     } else {
-      return "Sorry, no route exists.";
+      return noBus;
     }
   }
 }
