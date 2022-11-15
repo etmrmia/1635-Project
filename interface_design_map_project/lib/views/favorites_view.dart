@@ -47,7 +47,7 @@ class _FavoritesViewState extends State<FavoritesView> {
 
   favoritesList(BuildContext context) {
     return Consumer<HomeViewModel>(
-      builder: (context, vm, _) {
+      builder: (context, vm, child) {
         List<String> favorites = vm.favorites;
         return ListView.builder(
           itemCount: favorites.length,
