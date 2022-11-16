@@ -130,13 +130,18 @@ class _HomeViewState extends State<HomeView> {
         fixedSize: const Size(55, 55),
         shape: const CircleBorder(),
       ),
-      onPressed: (() => _pushSaved(vm)),
+      onPressed: () => pushFavorites(vm),
       // onPressed: () {
       //   // Navigator.of(context).pushNamed(favoritesRoute);
       //   Navigator.pushNamed(context, favoritesRoute);
       // },
       child: const Icon(Icons.favorite),
     );
+  }
+
+  pushFavorites(HomeViewModel vm) {
+    return Navigator.of(context).push(MaterialPageRoute<void>(
+        builder: (context) => FavoritesView(favorites: vm.myList)));
   }
 
 // Starting location search

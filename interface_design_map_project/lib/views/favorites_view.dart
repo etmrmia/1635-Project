@@ -8,21 +8,113 @@ import '../models/bus.dart';
 import '../router.dart';
 import 'package:provider/provider.dart';
 
+// class FavoritesView extends StatelessWidget {
+// final List<Bus> favorites;
+// const FavoritesView({super.key, required this.favorites});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: const Text("Favorites"),
+//       ),
+//       body: Column(
+//         children: [
+
+// Expanded(
+//   child: ListView.builder(
+//     itemCount: favorites.length,
+//     itemBuilder: (context, index) {
+//       // final favorited = true;
+//       return ListTile(
+//         title: Text(
+//           favorites[index].title,
+//         ),
+//         onTap: () {
+//           pushBusInfo(favorites[index], context);
+//         },
+//       );
+//     },
+//   ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+
+//   pushBusInfo(Bus line, BuildContext context) {
+//     return Navigator.of(context).push(
+//         MaterialPageRoute<void>(builder: (context) => BusLineView(line: line)));
+//   }
+// }
+
+// class BusLineSearch extends StatefulWidget {
+//   const BusLineSearch({super.key});
+
+//   @override
+//   State<BusLineSearch> createState() => _BusLineSearchState();
+// }
+
+// class _BusLineSearchState extends State<BusLineSearch> {
+//   final _busLine = TextEditingController();
+
+//   @override
+//   void dispose() {
+//     _busLine.dispose();
+//     super.dispose();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     // final vm = Provider.of<HomeViewModel>(context);
+//     List<Bus> buses = context.watch<HomeViewModel>().buses;
+
+//     return Container(
+//       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+//       child: TextFormField(
+//         controller: _busLine,
+//         decoration: const InputDecoration(
+//           labelText: "Bus Line",
+//           focusedBorder: OutlineInputBorder(
+//             borderSide: BorderSide(color: Colors.blue),
+//           ),
+//           enabledBorder: OutlineInputBorder(
+//             borderSide: BorderSide(
+//               color: Colors.grey,
+//               width: 1,
+//             ),
+//           ),
+//           contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+//         ),
+//         onFieldSubmitted: (value) {
+//           if (value.isNotEmpty) {
+//             for (int i = 0; i < buses.length; i++) {
+//               if (buses[i].title == value) {
+//                 context.read<HomeViewModel>().addToList(buses[i]);
+//               }
+//             }
+//             _busLine.clear();
+//             setState(() {});
+//           }
+//         },
+//       ),
+//     );
+//   }
+// }
+
 class FavoritesView extends StatefulWidget {
-  FavoritesView({super.key});
+  final List<Bus> favorites;
+  const FavoritesView({super.key, required this.favorites});
 
   @override
-  State<FavoritesView> createState() => _FavoritesViewState();
+  State<FavoritesView> createState() =>
+      _FavoritesViewState(favorites: favorites);
 }
 
 class _FavoritesViewState extends State<FavoritesView> {
   final _busLine = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    Provider.of<HomeViewModel>(context, listen: false);
-  }
+  final List<Bus> favorites;
+  _FavoritesViewState({required this.favorites});
 
   @override
   void dispose() {
@@ -41,50 +133,35 @@ class _FavoritesViewState extends State<FavoritesView> {
         children: [
           // Search for bus line
           busLineSearch(viewModel),
-          Container(
-            child: Center(
-              child: Consumer<HomeViewModel>(
-                builder: (context, value, child) => Text(
-                  '${value.myList.length}',
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-              ),
-            ),
-            // child: const Image(
-            //   image: AssetImage('assets/images/CCAC.png'),
-            // ),
-          ),
+
           // Display favorites list
-          Expanded(child: favoritesList()),
+          Expanded(child: favoritesList(favorites)),
         ],
       ),
     );
   }
 
   // Display list of favorites method
-  favoritesList() {
-    return Consumer<HomeViewModel>(
-      builder: (context, vm, _) {
-        return ListView.builder(
-          itemCount: vm.myList.length,
-          itemBuilder: (context, index) {
-            // final favorited = true;
-            return ListTile(
-              title: Text(
-                vm.myList[index].title,
-              ),
-              onTap: () {
-                //Navigator.pushNamed(context, buslineinfoRoute);
-                print("Favorites List");
-                for (int i = 0; i < vm.myList.length; i++) {
-                  print(vm.myList[i].title);
-                }
-              },
-            );
+  favoritesList(favorites) {
+    return ListView.builder(
+      itemCount: favorites.length,
+      itemBuilder: (context, index) {
+        // final favorited = true;
+        return ListTile(
+          title: Text(
+            favorites[index].title,
+          ),
+          onTap: () {
+            pushBusInfo(favorites[index]);
           },
         );
       },
     );
+  }
+
+  pushBusInfo(Bus line) {
+    return Navigator.of(context).push(
+        MaterialPageRoute<void>(builder: (context) => BusLineView(line: line)));
   }
 
   // Search by busline method
@@ -119,32 +196,6 @@ class _FavoritesViewState extends State<FavoritesView> {
           }
         },
       ),
-    );
-  }
-}
-
-class FavoriteList extends StatelessWidget {
-  const FavoriteList({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Consumer<HomeViewModel>(
-      builder: (context, vm, _) {
-        return ListView.builder(
-          itemCount: vm.myList.length,
-          itemBuilder: (context, index) {
-            // final favorited = true;
-            return ListTile(
-              title: Text(
-                vm.myList[index].title,
-              ),
-              onTap: () {
-                Navigator.pushNamed(context, buslineinfoRoute);
-              },
-            );
-          },
-        );
-      },
     );
   }
 }
