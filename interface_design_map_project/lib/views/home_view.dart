@@ -108,19 +108,13 @@ class _HomeViewState extends State<HomeView> {
 // Display map method
   map(HomeViewModel vm) {
     return Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        color: Colors.yellow,
-        child: Image.asset(
-          'assets/images/CCAC.png',
-          fit: BoxFit.fitHeight,
-        )
-        //AssetImage('assets/images/CCAC.png'),
-        // )
-        // child: const Image(
-        //   image: AssetImage('assets/images/CCAC.png'),
-        // ),
-        );
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
+      child: Image.asset(
+        'assets/images/CCAC.png',
+        fit: BoxFit.fitHeight,
+      ),
+    );
   }
 
 // Display favorites button
@@ -131,14 +125,11 @@ class _HomeViewState extends State<HomeView> {
         shape: const CircleBorder(),
       ),
       onPressed: () => pushFavorites(vm),
-      // onPressed: () {
-      //   // Navigator.of(context).pushNamed(favoritesRoute);
-      //   Navigator.pushNamed(context, favoritesRoute);
-      // },
       child: const Icon(Icons.favorite),
     );
   }
 
+  // Push favorites view
   pushFavorites(HomeViewModel vm) {
     return Navigator.of(context)
         .push(
@@ -204,11 +195,6 @@ class _HomeViewState extends State<HomeView> {
             if (_destination.text.isNotEmpty) {
               Bus line = vm.routes(_starting.text, _destination.text);
               pushBusInfo(line);
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //         builder: ((context) => BusLineView(line: line))));
-              //Navigator.pushNamed(context, buslineinfoRoute);
               _destination.clear();
               _starting.clear();
             }
@@ -218,6 +204,7 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
+  // Push bus info view
   pushBusInfo(Bus line) {
     return Navigator.of(context).push(
         MaterialPageRoute<void>(builder: (context) => BusLineView(line: line)));
@@ -260,35 +247,6 @@ class _HomeViewState extends State<HomeView> {
             );
           },
         ),
-      ),
-    );
-  }
-
-  void _pushSaved(HomeViewModel vm) {
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(
-        builder: (context) {
-          final tiles = vm.myList.map(
-            (pair) {
-              return ListTile(
-                title: Text(pair.title),
-              );
-            },
-          );
-          final divided = tiles.isNotEmpty
-              ? ListTile.divideTiles(
-                  context: context,
-                  tiles: tiles,
-                ).toList()
-              : <Widget>[];
-
-          return Scaffold(
-            appBar: AppBar(
-              title: const Text('Favorites'),
-            ),
-            body: ListView(children: divided),
-          );
-        },
       ),
     );
   }

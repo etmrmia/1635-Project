@@ -16,11 +16,11 @@ class BusLineView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("buslines"),
+        title: Text(line.title),
       ),
       body: Stack(
         children: [
-          map(),
+          map(context),
           Container(
             color: Colors.white,
             height: MediaQuery.of(context).size.height / 5,
@@ -32,19 +32,43 @@ class BusLineView extends StatelessWidget {
     );
   }
 
-  map() {
+  // Display map
+  map(BuildContext context) {
     return Container(
-      color: Colors.amberAccent,
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
+      child: Image.asset(
+        'assets/images/CCAC.png',
+        fit: BoxFit.fitHeight,
+      ),
     );
   }
 
+  // Display alerts
   alertsBox() {
     return Container(
-      margin: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey,
+            blurRadius: 9,
+            spreadRadius: 3,
+            offset: Offset(5, 5),
+          ),
+        ],
+      ),
       child: Column(
         children: [
-          const Text("Alert"),
-          Text(line.alert),
+          const Text(
+            "Alert",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          const Divider(),
+          Expanded(
+            child: Text(line.alert),
+          ),
         ],
       ),
     );

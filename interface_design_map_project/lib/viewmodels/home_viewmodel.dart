@@ -24,29 +24,17 @@ class _HomeViewModelState extends State<HomeViewModel> {
 
 //Dummy data
 final List<Bus> initialData = List.generate(
-    20,
+    10,
     (index) =>
         //Have to figure out a way to individualize alerts
-        Bus(title: "7$index" "C", alert: "On time."));
+        Bus(title: "7$index" "C", alert: "7$index" "C" " - On time."));
 
 class HomeViewModel extends ChangeNotifier {
   Bus bus61C = Bus(title: "61C McKeesport", alert: "on-time");
   Bus busY49 = Bus(title: "Y49 Prospect Flyer", alert: "delayed");
-  Bus bus61D = Bus(title: "61D Murray", alert: "on-time");
-  Bus bus71A = Bus(title: "71A Negley", alert: "delayed");
-  Bus bus71C = Bus(title: "71C Point Breeze", alert: "on-time");
-  Bus bus58 = Bus(title: "58 Greenfield", alert: "delayed");
   Bus noBus = Bus(title: "N/A", alert: "n/a");
 
   final List<Bus> _buses = initialData;
-  // [
-  //   Bus(title: "61C McKeesport", alert: "on-time"),
-  //   Bus(title: "Y49 Prospect Flyer", alert: "delayed"),
-  //   Bus(title: "61D Murray", alert: "on-time"),
-  //   Bus(title: "71A Negley", alert: "delayed"),
-  //   Bus(title: "71C Point Breeze", alert: "on-time"),
-  //   Bus(title: "58 Greenfield", alert: "delayed"),
-  // ];
 
   // Retrieve all buses
   List<Bus> get buses => _buses;
@@ -69,7 +57,7 @@ class HomeViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Gets bus from string
+  // Returns bus from string
   Bus getBus(String line) {
     for (int i = 0; i < _buses.length; i++) {
       if (_buses[i].title == line) {
@@ -100,46 +88,3 @@ class HomeViewModel extends ChangeNotifier {
     }
   }
 }
-
-
-/* testing
-class HomeViewModel extends ChangeNotifier {
-  List<String> buses = <String>[
-    "bus1",
-    "bus2",
-    "bus3",
-    "bus4",
-    "bus5",
-    "bus6",
-    "bus7",
-    "bus8",
-    "bus9",
-    "bus10",
-    "bus11",
-    "bus12",
-    "bus13",
-    "bus14",
-    "bus15",
-    "bus16",
-    "bus17",
-    "bus18",
-    "bus19"
-  ];
-  List<String> favorites = <String>["favorite1", "favorite2", "favorite3"];
-  ValueNotifier<int> favLen = ValueNotifier<int>(2);
-
-  addFavorite(String favorite) {
-    favorites.add(favorite);
-    print("adding " + favorite);
-    for (int i = 0; i < favorites.length; i++) print(favorites[i]);
-    notifyListeners();
-  }
-
-  removeFavorite(String favorite) {
-    favorites.remove(favorite);
-    print("removing " + favorite);
-    for (int i = 0; i < favorites.length; i++) print(favorites[i]);
-    notifyListeners();
-  }
-}
-*/
