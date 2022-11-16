@@ -140,8 +140,18 @@ class _HomeViewState extends State<HomeView> {
   }
 
   pushFavorites(HomeViewModel vm) {
-    return Navigator.of(context).push(MaterialPageRoute<void>(
-        builder: (context) => FavoritesView(favorites: vm.myList)));
+    return Navigator.of(context)
+        .push(
+      MaterialPageRoute<void>(
+        builder: (_) => ChangeNotifierProvider(
+          create: (context) => HomeViewModel(),
+          child: FavoritesView(favorites: vm.myList),
+        ),
+      ),
+    )
+        .then((_) {
+      setState(() {});
+    });
   }
 
 // Starting location search

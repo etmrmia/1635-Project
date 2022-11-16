@@ -24,7 +24,7 @@ class _HomeViewModelState extends State<HomeViewModel> {
 
 //Dummy data
 final List<Bus> initialData = List.generate(
-    3,
+    20,
     (index) =>
         //Have to figure out a way to individualize alerts
         Bus(title: "7$index" "C", alert: "On time."));
@@ -32,9 +32,21 @@ final List<Bus> initialData = List.generate(
 class HomeViewModel extends ChangeNotifier {
   Bus bus61C = Bus(title: "61C McKeesport", alert: "on-time");
   Bus busY49 = Bus(title: "Y49 Prospect Flyer", alert: "delayed");
+  Bus bus61D = Bus(title: "61D Murray", alert: "on-time");
+  Bus bus71A = Bus(title: "71A Negley", alert: "delayed");
+  Bus bus71C = Bus(title: "71C Point Breeze", alert: "on-time");
+  Bus bus58 = Bus(title: "58 Greenfield", alert: "delayed");
   Bus noBus = Bus(title: "N/A", alert: "n/a");
 
   final List<Bus> _buses = initialData;
+  // [
+  //   Bus(title: "61C McKeesport", alert: "on-time"),
+  //   Bus(title: "Y49 Prospect Flyer", alert: "delayed"),
+  //   Bus(title: "61D Murray", alert: "on-time"),
+  //   Bus(title: "71A Negley", alert: "delayed"),
+  //   Bus(title: "71C Point Breeze", alert: "on-time"),
+  //   Bus(title: "58 Greenfield", alert: "delayed"),
+  // ];
 
   // Retrieve all buses
   List<Bus> get buses => _buses;
@@ -55,6 +67,16 @@ class HomeViewModel extends ChangeNotifier {
   void removeFromList(Bus bus) {
     _myList.remove(bus);
     notifyListeners();
+  }
+
+  // Gets bus from string
+  Bus getBus(String line) {
+    for (int i = 0; i < _buses.length; i++) {
+      if (_buses[i].title == line) {
+        return _buses[i];
+      }
+    }
+    return noBus;
   }
 
   //Is the return value displayed at the top of screen?
