@@ -9,7 +9,7 @@ import '../router.dart';
 import 'package:provider/provider.dart';
 
 class FavoritesView extends StatefulWidget {
-  const FavoritesView({super.key});
+  FavoritesView({super.key});
 
   @override
   State<FavoritesView> createState() => _FavoritesViewState();
@@ -32,7 +32,7 @@ class _FavoritesViewState extends State<FavoritesView> {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = Provider.of<HomeViewModel>(context);
+    var viewModel = Provider.of<HomeViewModel>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Favorites"),
@@ -41,6 +41,19 @@ class _FavoritesViewState extends State<FavoritesView> {
         children: [
           // Search for bus line
           busLineSearch(viewModel),
+          Container(
+            child: Center(
+              child: Consumer<HomeViewModel>(
+                builder: (context, value, child) => Text(
+                  '${value.myList.length}',
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+              ),
+            ),
+            // child: const Image(
+            //   image: AssetImage('assets/images/CCAC.png'),
+            // ),
+          ),
           // Display favorites list
           Expanded(child: favoritesList()),
         ],
@@ -61,7 +74,11 @@ class _FavoritesViewState extends State<FavoritesView> {
                 vm.myList[index].title,
               ),
               onTap: () {
-                Navigator.pushNamed(context, buslineinfoRoute);
+                //Navigator.pushNamed(context, buslineinfoRoute);
+                print("Favorites List");
+                for (int i = 0; i < vm.myList.length; i++) {
+                  print(vm.myList[i].title);
+                }
               },
             );
           },
@@ -102,6 +119,32 @@ class _FavoritesViewState extends State<FavoritesView> {
           }
         },
       ),
+    );
+  }
+}
+
+class FavoriteList extends StatelessWidget {
+  const FavoriteList({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<HomeViewModel>(
+      builder: (context, vm, _) {
+        return ListView.builder(
+          itemCount: vm.myList.length,
+          itemBuilder: (context, index) {
+            // final favorited = true;
+            return ListTile(
+              title: Text(
+                vm.myList[index].title,
+              ),
+              onTap: () {
+                Navigator.pushNamed(context, buslineinfoRoute);
+              },
+            );
+          },
+        );
+      },
     );
   }
 }

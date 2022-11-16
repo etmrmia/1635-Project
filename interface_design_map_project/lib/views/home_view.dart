@@ -51,7 +51,7 @@ class _HomeViewState extends State<HomeView> {
               return <Widget>[
                 SliverAppBar(
                   floating: true,
-                  expandedHeight: MediaQuery.of(context).size.height / 2,
+                  expandedHeight: MediaQuery.of(context).size.height * 2 / 3,
                   forceElevated: innerBoxIsScrolled,
                   backgroundColor: Colors.transparent,
                 ),
@@ -108,11 +108,19 @@ class _HomeViewState extends State<HomeView> {
 // Display map method
   map(HomeViewModel vm) {
     return Container(
-      color: Colors.yellow,
-      // child: const Image(
-      //   image: AssetImage('assets/images/CCAC.png'),
-      // ),
-    );
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        color: Colors.yellow,
+        child: Image.asset(
+          'assets/images/CCAC.png',
+          fit: BoxFit.fitHeight,
+        )
+        //AssetImage('assets/images/CCAC.png'),
+        // )
+        // child: const Image(
+        //   image: AssetImage('assets/images/CCAC.png'),
+        // ),
+        );
   }
 
 // Display favorites button
@@ -179,14 +187,25 @@ class _HomeViewState extends State<HomeView> {
         onFieldSubmitted: (value) {
           setState(() {
             if (_destination.text.isNotEmpty) {
+              Bus line = vm.routes(_starting.text, _destination.text);
+              pushBusInfo(line);
+              // Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //         builder: ((context) => BusLineView(line: line))));
+              //Navigator.pushNamed(context, buslineinfoRoute);
               _destination.clear();
               _starting.clear();
-              Navigator.pushNamed(context, buslineinfoRoute);
             }
           });
         },
       ),
     );
+  }
+
+  pushBusInfo(Bus line) {
+    return Navigator.of(context).push(
+        MaterialPageRoute<void>(builder: (context) => BusLineView(line: line)));
   }
 
 // Display list of buses
@@ -220,7 +239,8 @@ class _HomeViewState extends State<HomeView> {
                 },
               ),
               onTap: () {
-                Navigator.pushNamed(context, buslineinfoRoute);
+                pushBusInfo(vm.buses[index]);
+                //Navigator.pushNamed(context, buslineinfoRoute);
               },
             );
           },

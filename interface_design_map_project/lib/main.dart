@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         child: HomeView(),
       ),
       onGenerateRoute: LocalRouter.Router.generateRoute,
-      initialRoute: homeRoute,
+      // initialRoute: homeRoute,
     );
   }
 }
