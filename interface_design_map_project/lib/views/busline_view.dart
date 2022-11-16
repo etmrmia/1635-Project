@@ -14,32 +14,32 @@ class BusLineView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = Provider.of<HomeViewModel>(context);
+    // final viewModel = Provider.of<HomeViewModel>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text("buslines"),
       ),
       body: Stack(
         children: [
-          map(viewModel),
+          map(),
           Container(
             color: Colors.white,
             height: MediaQuery.of(context).size.height / 5,
             alignment: Alignment.topCenter,
-            child: alertsBox(viewModel),
+            child: alertsBox(),
           ),
         ],
       ),
     );
   }
 
-  map(HomeViewModel vm) {
+  map() {
     return Container(
       color: Colors.amberAccent,
     );
   }
 
-  alertsBox(HomeViewModel vm) {
+  alertsBox() {
     return Container(
       margin: const EdgeInsets.all(10),
       child: Column(
