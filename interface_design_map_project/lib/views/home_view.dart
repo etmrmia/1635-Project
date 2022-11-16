@@ -34,7 +34,9 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = Provider.of<HomeViewModel>(context);
+    //final viewModel = Provider.of<HomeViewModel>(context);
+    var buses = context.watch<HomeViewModel>().buses;
+    var favorites = context.watch<HomeViewModel>().myList;
     // Home Page
     return Scaffold(
       appBar: AppBar(
@@ -43,7 +45,7 @@ class _HomeViewState extends State<HomeView> {
       body: Stack(
         children: [
           // Display map
-          map(viewModel),
+          map(),
           NestedScrollView(
             floatHeaderSlivers: true,
             headerSliverBuilder:
@@ -75,8 +77,8 @@ class _HomeViewState extends State<HomeView> {
               child: Column(
                 children: [
                   // Search Bars
-                  startSearch(viewModel),
-                  destinationSearch(viewModel),
+                  startSearch(),
+                  destinationSearch(),
                   // Bus List
                   Container(
                     margin: const EdgeInsets.symmetric(vertical: 8),
@@ -87,7 +89,7 @@ class _HomeViewState extends State<HomeView> {
                     ),
                   ),
                   Expanded(
-                    child: busList(context, viewModel),
+                    child: busList(buses, favorites),
                   ),
                 ],
               ),
@@ -97,7 +99,7 @@ class _HomeViewState extends State<HomeView> {
           Align(
             alignment: const FractionalOffset(.97, 0.02),
             child: Container(
-              child: favoritesViewButton(context, viewModel),
+              child: favoritesViewButton(),
             ),
           ),
         ],
@@ -106,7 +108,7 @@ class _HomeViewState extends State<HomeView> {
   }
 
 // Display map method
-  map(HomeViewModel vm) {
+  map() {
     return Container(
       color: Colors.yellow,
       // child: const Image(
@@ -116,23 +118,24 @@ class _HomeViewState extends State<HomeView> {
   }
 
 // Display favorites button
-  favoritesViewButton(BuildContext context, HomeViewModel vm) {
+  favoritesViewButton() {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         fixedSize: const Size(55, 55),
         shape: const CircleBorder(),
       ),
-      onPressed: (() => _pushSaved(vm)),
-      // onPressed: () {
-      //   // Navigator.of(context).pushNamed(favoritesRoute);
-      //   Navigator.pushNamed(context, favoritesRoute);
-      // },
+      // onPressed: (() => _pushSaved(vm)),
+      onPressed: () {
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const FavoritesView()));
+        // Navigator.pushNamed(context, favoritesRoute);
+      },
       child: const Icon(Icons.favorite),
     );
   }
 
 // Starting location search
-  startSearch(HomeViewModel vm) {
+  startSearch() {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
       child: TextFormField(
@@ -155,7 +158,7 @@ class _HomeViewState extends State<HomeView> {
   }
 
 // Destination search
-  destinationSearch(HomeViewModel vm) {
+  destinationSearch() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 8),
       child: TextFormField(
@@ -190,19 +193,16 @@ class _HomeViewState extends State<HomeView> {
   }
 
 // Display list of buses
-  busList(
-    BuildContext context,
-    HomeViewModel vm,
-  ) {
+  busList(List<Bus> buses, List<Bus> favorites) {
     return SingleChildScrollView(
       child: SizedBox(
         height: MediaQuery.of(context).size.height / 2,
         child: ListView.builder(
-          itemCount: vm.buses.length,
+          itemCount: buses.length,
           itemBuilder: (context, index) {
-            final favorited = vm.myList.contains(vm.buses[index]);
+            final favorited = favorites.contains(buses[index]);
             return ListTile(
-              title: Text(vm.buses[index].title),
+              title: Text(buses[index].title),
               trailing: GestureDetector(
                 child: Icon(
                   favorited ? Icons.favorite : Icons.favorite_border,
@@ -212,9 +212,10 @@ class _HomeViewState extends State<HomeView> {
                 onTap: () {
                   setState(() {
                     if (favorited) {
-                      vm.removeFromList(vm.buses[index]);
+                      // vm.removeFromList(vm.buses[index]);
+                      context.read<HomeViewModel>().addToList(buses[index]);
                     } else {
-                      vm.addToList(vm.buses[index]);
+                      context.read<HomeViewModel>().addToList(buses[index]);
                     }
                   });
                 },

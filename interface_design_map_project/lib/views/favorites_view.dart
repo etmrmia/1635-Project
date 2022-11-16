@@ -18,11 +18,11 @@ class FavoritesView extends StatefulWidget {
 class _FavoritesViewState extends State<FavoritesView> {
   final _busLine = TextEditingController();
 
-  @override
-  void initState() {
-    super.initState();
-    Provider.of<HomeViewModel>(context, listen: false);
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   Provider.of<HomeViewModel>(context, listen: false);
+  // }
 
   @override
   void dispose() {
@@ -32,7 +32,7 @@ class _FavoritesViewState extends State<FavoritesView> {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = Provider.of<HomeViewModel>(context);
+    final _favorites = context.watch<HomeViewModel>().myList;
     return Scaffold(
       appBar: AppBar(
         title: const Text("Favorites"),
@@ -40,39 +40,53 @@ class _FavoritesViewState extends State<FavoritesView> {
       body: Column(
         children: [
           // Search for bus line
-          busLineSearch(viewModel),
+          busLineSearch(),
           // Display favorites list
-          Expanded(child: favoritesList()),
+          Expanded(child: favoritesList(_favorites)),
         ],
       ),
     );
   }
 
   // Display list of favorites method
-  favoritesList() {
-    return Consumer<HomeViewModel>(
-      builder: (context, vm, _) {
-        return ListView.builder(
-          itemCount: vm.myList.length,
-          itemBuilder: (context, index) {
-            // final favorited = true;
-            return ListTile(
-              title: Text(
-                vm.myList[index].title,
-              ),
-              onTap: () {
-                Navigator.pushNamed(context, buslineinfoRoute);
-              },
-            );
+  favoritesList(List<Bus> favorites) {
+    return ListView.builder(
+      itemCount: favorites.length,
+      itemBuilder: (context, index) {
+        // final favorited = true;
+        return ListTile(
+          title: Text(
+            favorites[index].title,
+          ),
+          onTap: () {
+            Navigator.pushNamed(context, buslineinfoRoute);
           },
         );
       },
     );
+    // return Consumer<HomeViewModel>(
+    //   builder: (context, vm, _) {
+    //     return ListView.builder(
+    //       itemCount: vm.myList.length,
+    //       itemBuilder: (context, index) {
+    //         // final favorited = true;
+    //         return ListTile(
+    //           title: Text(
+    //             vm.myList[index].title,
+    //           ),
+    //           onTap: () {
+    //             Navigator.pushNamed(context, buslineinfoRoute);
+    //           },
+    //         );
+    //       },
+    //     );
+    //   },
+    // );
   }
 
   // Search by busline method
-  busLineSearch(HomeViewModel vm) {
-    List<Bus> listOfBuses = vm.buses;
+  busLineSearch() {
+    List<Bus> listOfBuses = context.read<HomeViewModel>().buses;
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
       child: TextFormField(
@@ -94,7 +108,7 @@ class _FavoritesViewState extends State<FavoritesView> {
           if (value.isNotEmpty) {
             for (int i = 0; i < listOfBuses.length; i++) {
               if (listOfBuses[i].title == value) {
-                vm.addToList(listOfBuses[i]);
+                context.read<HomeViewModel>().addToList(listOfBuses[i]);
               }
             }
             _busLine.clear();
