@@ -14,7 +14,7 @@ import '../constants.dart';
 class BusViewModel extends ChangeNotifier {
   // int s = 0;
   final Bus bus;
-  Routes route=Routes();
+  // Routes route=Routes();
  
   BusViewModel({required this.bus});
 
@@ -26,8 +26,16 @@ class BusViewModel extends ChangeNotifier {
     return bus.alert;
   }
 
-  // Route get route{
-  //   return bus.route;
-  // }
+  String get source{
+    return bus.source;
+  }
+
+   String get destination{
+    return bus.destination;
+  }
+
+  String get currentStop{
+    return bus.currentStop;
+  }
 
 }
