@@ -1,6 +1,6 @@
 # 1635-Project
 
-Group Members: Emma Tristiano, Ariane Seymour, Janet Majekodunmi
+Group Members: Emma Tristano, Ariane Seymour, Janet Majekodunmi
 
 To execute the application:
 
