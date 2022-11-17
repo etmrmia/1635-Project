@@ -1,7 +1,7 @@
 //import 'package:interface_design_map_project/assets/data.json';
 class Routes {
 
-  final String source="University of Pittsbugh";
+  final String source="University of Pittsburgh";
   final String currentStop="Forbes Ave + Bigelow Blvd (Schenley Dr)";
   // List<String> busStops;
   final String destination="Kennywood";
