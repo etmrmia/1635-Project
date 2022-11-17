@@ -1,11 +1,7 @@
 # 1635-Project
-
 Group Members: Emma Tristano, Ariane Seymour, Janet Majekodunmi
-
 # Software Execution
-
 ### To run the app:
-
 * Clone the repository using ‘git clone https://github.com/etmrmia/1635-Project.git’.
 * Open the folder in your preferred IDE, and navigate to the subfolder ‘interface_design_map_project.’
 * Open a terminal in your IDE and type ‘flutter run’ in the command line.
@@ -16,7 +12,6 @@ Group Members: Emma Tristano, Ariane Seymour, Janet Majekodunmi
 * Display of favorites list in a separate window and searching of buslines to add to favorites.
 
 # How to Perform Completed Tasks
-
 To view alerts for a particular bus line, tap the bus line from the list of bus lines in the Home View or the Favorites View. The alerts box is located at the top of the new window opened.
 
 To schedule a trip based on origin and destination, enter the origin into the textfield on the Home View with the “Starting” label. Then, enter the destination into the textfield below “Starting” that is labeled “Destination.” Once the user presses the enter key, they will be taken to a separate window that displays the bus line information for the route. As of now, only two routes are implemented, and the route on the map has yet to be displayed.
@@ -29,7 +24,7 @@ To view alerts for a particular bus line, tap the bus line from the list of bus 
 ### Data:
 Originally, data was going to be represented in JSON format in an assets folder.  This data would be parsed in model classes and fetched by view models via futures.  The team decided to just represent our data in the model to save time. 
 
-# Models and View Models:
+### Models and View Models:
 We planned to give each screen its own model and view model, but because of constraints on time, we chose to consolidate those classes into one model and one view model. 
 Again, our model class contains the data itself and does not manipulate it in any way.  The view model still consists of mostly the same functions as those represented in the architectural diagram; however, it will no longer use Change Notifier because of difficulty with its use.
 
