@@ -2,20 +2,20 @@
 
 Group Members: Emma Tristano, Ariane Seymour, Janet Majekodunmi
 
-Software Execution
+#Software Execution
 
-To run the app:
+###To run the app:
 
 * Clone the repository using ‘git clone https://github.com/etmrmia/1635-Project.git’.
 * Open the folder in your preferred IDE, and navigate to the subfolder ‘interface_design_map_project.’
 * Open a terminal in your IDE and type ‘flutter run’ in the command line.
 * Choose to run the app in a browser or Xcode (if you have a Mac).
 
-Tasks Completed
+#Tasks Completed
 * Alerts display.
 * Display of favorites list in a separate window and searching of buslines to add to favorites.
 
-How to Perform Completed Tasks
+#How to Perform Completed Tasks
 
 To view alerts for a particular bus line, tap the bus line from the list of bus lines in the Home View or the Favorites View. The alerts box is located at the top of the new window opened.
 
@@ -25,13 +25,14 @@ To view the favorites list, tap on the circular elevated button with a heart loc
 
 To view alerts for a particular bus line, tap the bus line from the list of bus lines in the Home View or the Favorites View. As of now, only the bus line name and the alert associated with the line is displayed. An image of the bus line route will eventually be added to the map display.
 
-Changes Made
-Data:
+#Changes Made
+###Data:
 Originally, data was going to be represented in JSON format in an assets folder.  This data would be parsed in model classes and fetched by view models via futures.  The team decided to just represent our data in the model to save time. 
-Models and View Models:
+
+#Models and View Models:
 We planned to give each screen its own model and view model, but because of constraints on time, we chose to consolidate those classes into one model and one view model. 
 Again, our model class contains the data itself and does not manipulate it in any way.  The view model still consists of mostly the same functions as those represented in the architectural diagram; however, it will no longer use Change Notifier because of difficulty with its use.
-View:
 
+###View:
 Originally, we planned to use ChangeNotifierProvider with a Consumer widget to update the data. Due to difficulties implementing, we decided to pass in the data to be displayed to the constructor of the view class. We also decided to use a NestedScrollView to display the home page instead of just displaying the elements in a stack to allow the user to view a larger portion of the map. We are also relying less on the router than previously planned due to passing in values to the constructor.
 
