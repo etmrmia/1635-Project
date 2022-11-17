@@ -6,14 +6,14 @@ Software Execution
 
 To run the app:
 
-Clone the repository using ‘git clone https://github.com/etmrmia/1635-Project.git’.
-Open the folder in your preferred IDE, and navigate to the subfolder ‘interface_design_map_project.’
-Open a terminal in your IDE and type ‘flutter run’ in the command line.
-Choose to run the app in a browser or Xcode (if you have a Mac).
+* Clone the repository using ‘git clone https://github.com/etmrmia/1635-Project.git’.
+* Open the folder in your preferred IDE, and navigate to the subfolder ‘interface_design_map_project.’
+* Open a terminal in your IDE and type ‘flutter run’ in the command line.
+* Choose to run the app in a browser or Xcode (if you have a Mac).
 
 Tasks Completed
-Alerts display.
-Display of favorites list in a separate window and searching of buslines to add to favorites.
+* Alerts display.
+* Display of favorites list in a separate window and searching of buslines to add to favorites.
 
 How to Perform Completed Tasks
 
