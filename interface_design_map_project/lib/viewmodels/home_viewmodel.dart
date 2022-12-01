@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/bus.dart';
+import '../viewmodels/bus_viewmodel.dart';
 import '../views/busline_view.dart';
 import '../views/favorites_view.dart';
 import '../views/home_view.dart';
@@ -21,20 +22,22 @@ class _HomeViewModelState extends State<HomeViewModel> {
     return Container();
   }
 }*/
-
 //Dummy data
-final List<Bus> initialData = List.generate(
+List<Bus> initialData = 
+//List<Bus>.filled(3, noBus, bus61C, busY49, growable: true);
+List.generate(
     3,
     (index) =>
         //Have to figure out a way to individualize alerts
         Bus(title: "7$index" "C", alert: "On time.", source: "", destination: "", currentStop: "" ));
 
 class HomeViewModel extends ChangeNotifier {
-  Bus bus61C = Bus(title: "61C McKeesport", alert: "on-time", source: "University of Pittsburgh", destination: "Kennywood", currentStop: "bigelow");
-  //Bus busY49 = Bus(title: "Y49 Prospect Flyer", alert: "delayed");
-  Bus noBus = Bus(title: "N/A", alert: "n/a", source: "n/a", destination: "n/a", currentStop: "n/a");
+  Bus bus61C = Bus(title: "61C McKeesport", alert: "on-time", source: "University of Pittsburgh", destination: "Kennywood", currentStop: "Bigelow Blvd");
+  Bus busY49 = Bus(title: "Y49 Prospect Flyer", alert: "delayed 5 minutes", source: "Wood & Sixth", destination: "CCAC South", currentStop: "tbd" );
+  Bus noBus = Bus(title: "n/a", alert: "n/a", source: "n/a", destination: "n/a", currentStop: "n/a");
 
   final List<Bus> _buses = initialData;
+
 
   // Retrieve all buses
   List<Bus> get buses => _buses;
@@ -71,8 +74,8 @@ class HomeViewModel extends ChangeNotifier {
   Bus routes(String src, String dest) {
     if (src == "University of Pittsburgh" && dest == "Kennywood") {
       return bus61C;
-    // } else if (src == "Wood & Sixth" && dest == "CCAC South") {
-    //   return busY49;
+    } else if (src == "Wood & Sixth" && dest == "CCAC South") {
+      return busY49;
     } else {
       return noBus;
     }
