@@ -5,6 +5,7 @@ class Routes {
   final String currentStop="Forbes Ave + Bigelow Blvd (Schenley Dr)";
   // List<String> busStops;
   final String destination="Kennywood";
+   
   //final String map;
   // final String alert;
   

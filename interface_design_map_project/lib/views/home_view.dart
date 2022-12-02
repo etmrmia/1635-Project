@@ -111,7 +111,7 @@ class _HomeViewState extends State<HomeView> {
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       child: Image.asset(
-        'assets/images/CCAC.png',
+        'assets/images/Pittsburgh Map.png',
         fit: BoxFit.fitHeight,
       ),
     );
