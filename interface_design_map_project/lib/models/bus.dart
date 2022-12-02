@@ -4,6 +4,6 @@ class Bus extends Routes {
  // Routes route;
  
 
-  Bus({required this.title, required this.alert, required source, required destination, currentStop});
+  Bus({required this.title, required this.alert, required source, required destination, currentStop, required busImage});
   
 }

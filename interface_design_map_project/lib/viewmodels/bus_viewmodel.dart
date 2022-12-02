@@ -38,4 +38,8 @@ class BusViewModel extends ChangeNotifier {
     return bus.currentStop;
   }
 
+  String get busImage{
+    return bus.busImage;
+  }
+
 }

@@ -4,6 +4,7 @@ class Routes {
   final String source="University of Pittsburgh";
   final String currentStop="Forbes Ave + Bigelow Blvd (Schenley Dr)";
   // List<String> busStops;
+  String busImage="Kennywood.png";
   final String destination="Kennywood";
    
   //final String map;
