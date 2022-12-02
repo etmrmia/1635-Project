@@ -22,12 +22,11 @@ class _HomeViewModelState extends State<HomeViewModel> {
   }
 }*/
 
-
-final List<Bus> initialData = 
-  List.generate(
+final List<Bus> initialData = List.generate(
     4,
-   (index) => index %  7 ==0
+    (index) => index % 7 == 0
         //Have to figure out a way to individualize alerts
+<<<<<<< HEAD
         ?Bus(title: "6$index", alert: "6$index" " - On time.", source: "Inbound-Mckeesport Transportation Center", destination: "Lysle Blvd + Locust FS", currentStop: "Walnut St + 27th FS", busImage: "")
         :Bus(title: "8$index", alert: "8$index" " - On time.", source: "", destination: "", currentStop: "", busImage: "")
         );
@@ -37,6 +36,42 @@ class HomeViewModel extends ChangeNotifier {
   Bus busY49 = Bus(title: "Y49", alert: "delayed 5 minutes", source: "Wood & Sixth", destination: "CCAC South", currentStop: "tbd", busImage: "");
   Bus noBus = Bus(title: "n/a", alert: "n/a", source: "n/a", destination: "n/a", currentStop: "n/a", busImage: "n/a");
 
+=======
+        ? Bus(
+            title: "6$index",
+            alert: "6$index" " - On time.",
+            source: "Inbound-Mckeesport Transportation Center",
+            destination: "Lysle Blvd + Locust FS",
+            currentStop: "Walnut St + 27th FS")
+        : Bus(
+            title: "8$index",
+            alert: "7$index" "C" " - On time.",
+            source: "",
+            destination: "",
+            currentStop: "")
+    //Bus(title: "7$index" "A", alert: "7$index" "A" " - On time.", source: "", destination: "", currentStop: "")
+    );
+
+class HomeViewModel extends ChangeNotifier {
+  Bus bus61C = Bus(
+      title: "61C McKeesport",
+      alert: "on-time",
+      source: "University of Pittsburgh",
+      destination: "Kennywood",
+      currentStop: "Bigelow Blvd");
+  Bus busY49 = Bus(
+      title: "Y49 Prospect Flyer",
+      alert: "delayed 5 minutes",
+      source: "Wood & Sixth",
+      destination: "CCAC South",
+      currentStop: "tbd");
+  Bus noBus = Bus(
+      title: "n/a",
+      alert: "n/a",
+      source: "n/a",
+      destination: "n/a",
+      currentStop: "n/a");
+>>>>>>> 95f5bde6a333e665b2028160c38fd54683994fe7
 
   final List<Bus> _buses = initialData;
 
