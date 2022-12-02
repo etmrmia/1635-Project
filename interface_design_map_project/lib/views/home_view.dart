@@ -109,9 +109,9 @@ class _HomeViewState extends State<HomeView> {
   map(HomeViewModel vm) {
     return Container(
       color: Colors.yellow,
-      // child: const Image(
-      //   image: AssetImage('assets/images/CCAC.png'),
-      // ),
+      child: const Image(
+        image: AssetImage('assets/images/Pittsburgh Map.png'),
+       ),
     );
   }
 
