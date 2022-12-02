@@ -1,3 +1,5 @@
+import 'dart:js_util';
+
 import 'package:flutter/material.dart';
 import '../constants.dart';
 import 'busline_view.dart';
@@ -21,11 +23,45 @@ class BusLineView extends StatelessWidget {
       body: Stack(
         children: [
           map(context),
-          Container(
-            color: Colors.white,
-            height: MediaQuery.of(context).size.height / 5,
-            alignment: Alignment.topCenter,
-            child: alertsBox(),
+          NestedScrollView(
+            floatHeaderSlivers: true,
+            headerSliverBuilder:
+                (BuildContext context, bool innerBoxIsScrolled) {
+              return <Widget>[
+                SliverAppBar(
+                  floating: true,
+                  expandedHeight: MediaQuery.of(context).size.height * 2 / 3,
+                  forceElevated: innerBoxIsScrolled,
+                  backgroundColor: Colors.transparent,
+                ),
+              ];
+            },
+            // Information Section
+            body: Container(
+              padding: const EdgeInsets.only(bottom: 20),
+              height: MediaQuery.of(context).size.height / 2,
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey,
+                    blurRadius: 9,
+                    spreadRadius: 3,
+                    offset: Offset(5, 5),
+                  ),
+                ],
+              ),
+              child: Column(
+                children: [
+                  titleDisplay("Alert"),
+                  // Display alert
+                  Text(line.alert),
+                  titleDisplay("Directions"),
+                  // List of directions
+                  Text("direction"),
+                ],
+              ),
+            ),
           ),
         ],
       ),
@@ -45,31 +81,12 @@ class BusLineView extends StatelessWidget {
   }
 
   // Display alerts
-  alertsBox() {
+  titleDisplay(String title) {
     return Container(
       padding: const EdgeInsets.all(10),
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey,
-            blurRadius: 9,
-            spreadRadius: 3,
-            offset: Offset(5, 5),
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          const Text(
-            "Alert",
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-          const Divider(),
-          Expanded(
-            child: Text(line.alert),
-          ),
-        ],
+      child: Text(
+        title,
+        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
       ),
     );
   }
