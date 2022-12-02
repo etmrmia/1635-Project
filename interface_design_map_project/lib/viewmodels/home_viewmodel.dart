@@ -25,10 +25,10 @@ class _HomeViewModelState extends State<HomeViewModel> {
 //Dummy data
 List<Bus> initialData = 
 List.generate(
-    3,
+    1,
     (index) =>
         //Have to figure out a way to individualize alerts
-        Bus(title: "7$index""C" "$index", alert: "On time.", source: "", destination: "", currentStop: "" ));
+        Bus(title: "71C", alert: "On time.", source: "", destination: "", currentStop: "" ));
 
 class HomeViewModel extends ChangeNotifier {
   Bus bus61C = Bus(title: "61C McKeesport", alert: "on-time", source: "University of Pittsburgh", destination: "Kennywood", currentStop: "Bigelow Blvd");
