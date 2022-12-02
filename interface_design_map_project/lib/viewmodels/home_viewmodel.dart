@@ -43,6 +43,7 @@ class HomeViewModel extends ChangeNotifier {
   Bus noBus = Bus(title: "n/a", alert: "n/a", source: "n/a", destination: "n/a", currentStop: "n/a");
 
   final List<Bus> _buses = initialData;
+  
 
 
   // Retrieve all buses
@@ -63,6 +64,13 @@ class HomeViewModel extends ChangeNotifier {
   // Removing a bus from the favorites list
   void removeFromList(Bus bus) {
     _myList.remove(bus);
+    notifyListeners();
+  }
+
+//adding buses to home page
+  void addBustoHomePage(Bus bus){
+    _buses.add(bus61C);
+    _buses.add(busY49);
     notifyListeners();
   }
 
