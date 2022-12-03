@@ -32,7 +32,7 @@ final List<Bus> initialData = List.generate(
 
 class HomeViewModel extends ChangeNotifier {
   Bus bus61C = Bus(title: "61C", alert: "on-time", source: "University of Pittsburgh", destination: "Kennywood", currentStop: "Bigelow Blvd", busImage: "Kennywood.png");
-  Bus busY49 = Bus(title: "Y49", alert: "delayed 5 minutes", source: "Wood & Sixth", destination: "CCAC South", currentStop: "tbd", busImage: "");
+  Bus busY49 = Bus(title: "Y49", alert: "delayed 5 minutes", source: "Wood & Sixth", destination: "CCAC South", currentStop: "tbd", busImage: "CCAC.png");
   Bus noBus = Bus(title: "n/a", alert: "n/a", source: "n/a", destination: "n/a", currentStop: "n/a", busImage: "n/a");
 
 
