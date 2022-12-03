@@ -6,7 +6,7 @@ class Routes {
   // List<String> busStops;
   String busImage="Kennywood.png";
   final String destination="Kennywood";
-   
+  var instructions = [];
   //final String map;
   // final String alert;
   
