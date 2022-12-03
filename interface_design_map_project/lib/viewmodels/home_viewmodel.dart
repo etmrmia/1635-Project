@@ -26,7 +26,7 @@ final List<Bus> initialData = List.generate(
     4,
     (index) => index % 7 == 0
         //Have to figure out a way to individualize alerts
-        ?Bus(title: "6$index", alert: "6$index" " - On time.", source: "Inbound-Mckeesport Transportation Center", destination: "Lysle Blvd + Locust FS", currentStop: "Walnut St + 27th FS", busImage: "")
+        ?Bus(title: "6$index", alert: "6$index" " - On time.", source: "Walnut St + Linden", destination: "Young St + Yester", currentStop: "Walnut St + 27th FS", busImage: "Bus 60.png")
         :Bus(title: "8$index", alert: "8$index" " - On time.", source: "", destination: "", currentStop: "", busImage: "")
         );
 
