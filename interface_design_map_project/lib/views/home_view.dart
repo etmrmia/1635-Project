@@ -75,15 +75,26 @@ class _HomeViewState extends State<HomeView> {
               child: Column(
                 children: [
                   // Search Bars
-                  startSearch(viewModel),
-                  destinationSearch(viewModel),
+                  Semantics(
+                    label: "Search starting location",
+                    textField: true,
+                    child: startSearch(viewModel),
+                  ),
+                  Semantics(
+                    label: "Search destination",
+                    textField: true,
+                    child: destinationSearch(viewModel),
+                  ),
                   // Bus List
-                  Container(
-                    margin: const EdgeInsets.symmetric(vertical: 8),
-                    child: const Text(
-                      "Buses",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  Semantics(
+                    label: "Bus list",
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(vertical: 8),
+                      child: const Text(
+                        "Buses",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ),
                   Expanded(
@@ -222,28 +233,31 @@ class _HomeViewState extends State<HomeView> {
           itemCount: vm.buses.length,
           itemBuilder: (context, index) {
             final favorited = vm.myList.contains(vm.buses[index]);
-            return ListTile(
-              title: Text(vm.buses[index].title),
-              trailing: GestureDetector(
-                child: Icon(
-                  favorited ? Icons.favorite : Icons.favorite_border,
-                  color: favorited ? Colors.red : null,
-                  semanticLabel: favorited ? 'Remove from saved' : 'Save',
+            return Semantics(
+              label: vm.buses[index].title,
+              child: ListTile(
+                title: Text(vm.buses[index].title),
+                trailing: GestureDetector(
+                  child: Icon(
+                    favorited ? Icons.favorite : Icons.favorite_border,
+                    color: favorited ? Colors.red : null,
+                    semanticLabel: favorited ? 'Remove from saved' : 'Save',
+                  ),
+                  onTap: () {
+                    setState(() {
+                      if (favorited) {
+                        vm.removeFromList(vm.buses[index]);
+                      } else {
+                        vm.addToList(vm.buses[index]);
+                      }
+                    });
+                  },
                 ),
                 onTap: () {
-                  setState(() {
-                    if (favorited) {
-                      vm.removeFromList(vm.buses[index]);
-                    } else {
-                      vm.addToList(vm.buses[index]);
-                    }
-                  });
+                  pushBusInfo(vm.buses[index]);
+                  //Navigator.pushNamed(context, buslineinfoRoute);
                 },
               ),
-              onTap: () {
-                pushBusInfo(vm.buses[index]);
-                //Navigator.pushNamed(context, buslineinfoRoute);
-              },
             );
           },
         ),
