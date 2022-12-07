@@ -51,7 +51,7 @@ class _HomeViewState extends State<HomeView> {
               return <Widget>[
                 SliverAppBar(
                   floating: true,
-                  expandedHeight: MediaQuery.of(context).size.height * 2 / 3,
+                  expandedHeight: MediaQuery.of(context).size.height * 3 / 5,
                   forceElevated: innerBoxIsScrolled,
                   backgroundColor: Colors.transparent,
                 ),
@@ -60,7 +60,7 @@ class _HomeViewState extends State<HomeView> {
             // Information Section
             body: Container(
               padding: const EdgeInsets.only(bottom: 20),
-              height: MediaQuery.of(context).size.height / 2,
+              height: MediaQuery.of(context).size.height / 3,
               decoration: const BoxDecoration(
                 color: Colors.white,
                 boxShadow: [
@@ -75,21 +75,15 @@ class _HomeViewState extends State<HomeView> {
               child: Column(
                 children: [
                   // Search Bars
-                  Semantics(
-                    label: "Search starting location",
-                    textField: true,
-                    child: startSearch(viewModel),
-                  ),
-                  Semantics(
-                    label: "Search destination",
-                    textField: true,
-                    child: destinationSearch(viewModel),
-                  ),
+
+                  startSearch(viewModel),
+                  destinationSearch(viewModel),
+
                   // Bus List
-                  Semantics(
-                    label: "Bus list",
-                    child: Container(
-                      margin: const EdgeInsets.symmetric(vertical: 8),
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 8),
+                    child: Semantics(
+                      label: "Bus list",
                       child: const Text(
                         "Buses",
                         style: TextStyle(
@@ -160,20 +154,24 @@ class _HomeViewState extends State<HomeView> {
   startSearch(HomeViewModel vm) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-      child: TextFormField(
-        controller: _starting,
-        decoration: const InputDecoration(
-          labelText: "Starting",
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.blue),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.grey,
-              width: 1,
+      child: Semantics(
+        label: "Search starting location",
+        textField: true,
+        child: TextFormField(
+          controller: _starting,
+          decoration: const InputDecoration(
+            labelText: "Starting",
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.blue),
             ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.grey,
+                width: 1,
+              ),
+            ),
+            contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
           ),
-          contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
         ),
       ),
     );
@@ -183,34 +181,38 @@ class _HomeViewState extends State<HomeView> {
   destinationSearch(HomeViewModel vm) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 8),
-      child: TextFormField(
-        controller: _destination,
-        textInputAction: TextInputAction.send,
-        decoration: const InputDecoration(
-          labelText: "Destination",
-          focusedBorder: OutlineInputBorder(
-            //borderRadius: BorderRadius.circular(25),
-            borderSide: BorderSide(color: Colors.blue),
-          ),
-          enabledBorder: OutlineInputBorder(
-            // borderRadius: BorderRadius.circular(25),
-            borderSide: BorderSide(
-              color: Colors.grey,
-              width: 1,
+      child: Semantics(
+        label: "Search destination",
+        textField: true,
+        child: TextFormField(
+          controller: _destination,
+          textInputAction: TextInputAction.send,
+          decoration: const InputDecoration(
+            labelText: "Destination",
+            focusedBorder: OutlineInputBorder(
+              //borderRadius: BorderRadius.circular(25),
+              borderSide: BorderSide(color: Colors.blue),
             ),
+            enabledBorder: OutlineInputBorder(
+              // borderRadius: BorderRadius.circular(25),
+              borderSide: BorderSide(
+                color: Colors.grey,
+                width: 1,
+              ),
+            ),
+            contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
           ),
-          contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+          onFieldSubmitted: (value) {
+            setState(() {
+              if (_destination.text.isNotEmpty) {
+                Bus line = vm.routes(_starting.text, _destination.text);
+                pushBusInfo(line);
+                _destination.clear();
+                _starting.clear();
+              }
+            });
+          },
         ),
-        onFieldSubmitted: (value) {
-          setState(() {
-            if (_destination.text.isNotEmpty) {
-              Bus line = vm.routes(_starting.text, _destination.text);
-              pushBusInfo(line);
-              _destination.clear();
-              _starting.clear();
-            }
-          });
-        },
       ),
     );
   }
