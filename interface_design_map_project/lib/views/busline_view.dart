@@ -51,12 +51,25 @@ class BusLineView extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  titleDisplay("Alert"),
+                  Semantics(
+                    label: "Alert",
+                    child: titleDisplay("Alert"),
+                  ),
                   // Display alert
-                  Text(line.alert),
-                  titleDisplay("Directions"),
+                  Semantics(
+                    label: line.alert,
+                    child: Text(line.alert),
+                  ),
+
+                  Semantics(
+                    label: "Directions",
+                    child: titleDisplay("Directions"),
+                  ),
                   // List of directions
-                  Text("direction"),
+                  Semantics(
+                    label: "Directions",
+                    child: Text("direction"),
+                  ),
                 ],
               ),
             ),

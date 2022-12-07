@@ -108,7 +108,11 @@ class _HomeViewState extends State<HomeView> {
           Align(
             alignment: const FractionalOffset(.97, 0.02),
             child: Container(
-              child: favoritesViewButton(context, viewModel),
+              child: Semantics(
+                label: "View Favorites List Button",
+                button: true,
+                child: favoritesViewButton(context, viewModel),
+              ),
             ),
           ),
         ],
