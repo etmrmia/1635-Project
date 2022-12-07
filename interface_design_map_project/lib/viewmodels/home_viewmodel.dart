@@ -4,6 +4,7 @@ import '../views/busline_view.dart';
 import '../views/favorites_view.dart';
 import '../views/home_view.dart';
 import 'package:provider/provider.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 /*import '../router.dart' as LocalRouter;
 import '../constants.dart';
@@ -21,19 +22,20 @@ class _HomeViewModelState extends State<HomeViewModel> {
     return Container();
   }
 }*/
-
+final player = AudioPlayer();
+//   await player.setSource(AssetSource('sounds/coin.wav'));
 final List<Bus> initialData = List.generate(
     4,
     (index) => index % 7 == 0
         //Have to figure out a way to individualize alerts
-        ?Bus(title: "6$index", alert: "6$index" " - On time.", source: "Walnut St + Linden", destination: "Young St + Yester", currentStop: "Walnut St + 27th FS", busImage: "Bus 60.png")
-        :Bus(title: "8$index", alert: "8$index" " - On time.", source: "", destination: "", currentStop: "", busImage: "")
+        ?Bus(title: "6$index", alert: "6$index" " - On time.", arrivalTime: "in 20 minutes", source: "Walnut St + Linden", destination: "Young St + Yester", currentStop: "Walnut St + 27th FS", busImage: "Bus 60.png")
+        :Bus(title: "8$index", alert: "8$index" " - On time.", arrivalTime: "in 5 minutes", source: "", destination: "", currentStop: "", busImage: "")
         );
 
 class HomeViewModel extends ChangeNotifier {
-  Bus bus61C = Bus(title: "61C", alert: "on-time", source: "University of Pittsburgh", destination: "Kennywood", currentStop: "Bigelow Blvd", busImage: "Kennywood.png");
-  Bus busY49 = Bus(title: "Y49", alert: "delayed 5 minutes", source: "Wood & Sixth", destination: "CCAC South", currentStop: "tbd", busImage: "CCAC.png");
-  Bus noBus = Bus(title: "n/a", alert: "n/a", source: "n/a", destination: "n/a", currentStop: "n/a", busImage: "n/a");
+  Bus bus61C = Bus(title: "61C", alert: "on-time, slightly crowded", arrivalTime:"in 1 minute", source: "University of Pittsburgh", destination: "Kennywood", currentStop: "Litchfield Towers", busImage: "Kennywood.png", directions:["From Litchfield towers, head southwest on Fifth Ave toward N Bouquet St", "Turn left onto S Bouquet St", "Turn left onto Forbes Ave with the destination being the bus stop 'Forbes Ave + Bouquet' St on the right"] );
+  Bus busY49 = Bus(title: "Y49", alert: "delayed 5 minutes, not crowded",arrivalTime:"in 30 minutes",  source: "Wood & Sixth", destination: "CCAC South", currentStop: "tbd", busImage: "CCAC.png", stopChange: "stop Smithfield St at Fifth Ave is temporarily out of service, please go to Smithfield St + Forbes Ave");
+  Bus noBus = Bus(title: "n/a", alert: "n/a", arrivalTime: "n/a", source: "n/a", destination: "n/a", currentStop: "n/a", busImage: "n/a");
 
 
   final List<Bus> _buses = initialData;
