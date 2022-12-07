@@ -60,7 +60,7 @@ class _HomeViewState extends State<HomeView> {
             // Information Section
             body: Container(
               padding: const EdgeInsets.only(bottom: 20),
-              height: MediaQuery.of(context).size.height / 3,
+              height: MediaQuery.of(context).size.height / 2,
               decoration: const BoxDecoration(
                 color: Colors.white,
                 boxShadow: [
@@ -75,15 +75,21 @@ class _HomeViewState extends State<HomeView> {
               child: Column(
                 children: [
                   // Search Bars
-
-                  startSearch(viewModel),
-                  destinationSearch(viewModel),
-
+                  Semantics(
+                    label: "Search starting location",
+                    textField: true,
+                    child: startSearch(viewModel),
+                  ),
+                  Semantics(
+                    label: "Search destination",
+                    textField: true,
+                    child: destinationSearch(viewModel),
+                  ),
                   // Bus List
-                  Container(
-                    margin: const EdgeInsets.symmetric(vertical: 8),
-                    child: Semantics(
-                      label: "Bus list",
+                  Semantics(
+                    label: "Bus list",
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(vertical: 8),
                       child: const Text(
                         "Buses",
                         style: TextStyle(
@@ -102,7 +108,11 @@ class _HomeViewState extends State<HomeView> {
           Align(
             alignment: const FractionalOffset(.97, 0.02),
             child: Container(
-              child: favoritesViewButton(context, viewModel),
+              child: Semantics(
+                label: "View List of Favorite Buses",
+                button: true,
+                child: favoritesViewButton(context, viewModel),
+              ),
             ),
           ),
         ],
@@ -154,24 +164,20 @@ class _HomeViewState extends State<HomeView> {
   startSearch(HomeViewModel vm) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-      child: Semantics(
-        label: "Search starting location",
-        textField: true,
-        child: TextFormField(
-          controller: _starting,
-          decoration: const InputDecoration(
-            labelText: "Starting",
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.blue),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Colors.grey,
-                width: 1,
-              ),
-            ),
-            contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+      child: TextFormField(
+        controller: _starting,
+        decoration: const InputDecoration(
+          labelText: "Starting",
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.blue),
           ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.grey,
+              width: 1,
+            ),
+          ),
+          contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
         ),
       ),
     );
@@ -181,38 +187,34 @@ class _HomeViewState extends State<HomeView> {
   destinationSearch(HomeViewModel vm) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 8),
-      child: Semantics(
-        label: "Search destination",
-        textField: true,
-        child: TextFormField(
-          controller: _destination,
-          textInputAction: TextInputAction.send,
-          decoration: const InputDecoration(
-            labelText: "Destination",
-            focusedBorder: OutlineInputBorder(
-              //borderRadius: BorderRadius.circular(25),
-              borderSide: BorderSide(color: Colors.blue),
-            ),
-            enabledBorder: OutlineInputBorder(
-              // borderRadius: BorderRadius.circular(25),
-              borderSide: BorderSide(
-                color: Colors.grey,
-                width: 1,
-              ),
-            ),
-            contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+      child: TextFormField(
+        controller: _destination,
+        textInputAction: TextInputAction.send,
+        decoration: const InputDecoration(
+          labelText: "Destination",
+          focusedBorder: OutlineInputBorder(
+            //borderRadius: BorderRadius.circular(25),
+            borderSide: BorderSide(color: Colors.blue),
           ),
-          onFieldSubmitted: (value) {
-            setState(() {
-              if (_destination.text.isNotEmpty) {
-                Bus line = vm.routes(_starting.text, _destination.text);
-                pushBusInfo(line);
-                _destination.clear();
-                _starting.clear();
-              }
-            });
-          },
+          enabledBorder: OutlineInputBorder(
+            // borderRadius: BorderRadius.circular(25),
+            borderSide: BorderSide(
+              color: Colors.grey,
+              width: 1,
+            ),
+          ),
+          contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
         ),
+        onFieldSubmitted: (value) {
+          setState(() {
+            if (_destination.text.isNotEmpty) {
+              Bus line = vm.routes(_starting.text, _destination.text);
+              pushBusInfo(line);
+              _destination.clear();
+              _starting.clear();
+            }
+          });
+        },
       ),
     );
   }
