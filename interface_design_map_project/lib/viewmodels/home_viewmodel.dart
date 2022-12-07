@@ -4,6 +4,7 @@ import '../views/busline_view.dart';
 import '../views/favorites_view.dart';
 import '../views/home_view.dart';
 import 'package:provider/provider.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 /*import '../router.dart' as LocalRouter;
 import '../constants.dart';
@@ -21,7 +22,8 @@ class _HomeViewModelState extends State<HomeViewModel> {
     return Container();
   }
 }*/
-
+final player = AudioPlayer();
+//   await player.setSource(AssetSource('sounds/coin.wav'));
 final List<Bus> initialData = List.generate(
     4,
     (index) => index % 7 == 0
