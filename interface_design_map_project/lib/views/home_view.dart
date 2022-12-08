@@ -262,7 +262,6 @@ class _HomeViewState extends State<HomeView> {
                 ),
                 onTap: () {
                   pushBusInfo(vm.buses[index], false);
-                  //Navigator.pushNamed(context, buslineinfoRoute);
                 },
               ),
             );

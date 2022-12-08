@@ -33,7 +33,7 @@ List<Bus> createBus() {
       currentStop: "Walnut St + 27th FS",
       busImage: "Bus 60.png", //What's this?
       directions: [
-        "From Litchfield Towers, head east on 5th Ave toward Tennyson Ave."
+        "From Litchfield Towers, head east on 5th Ave toward Tennyson Ave.",
       ]);
 
   Bus bus77 = Bus(
@@ -45,7 +45,7 @@ List<Bus> createBus() {
     currentStop: "Walnut St + 27th FS",
     busImage: "Bus 60.png",
     directions: [
-      "From Litchfield Towers, head east for 300 ft on Baum Blvd toward Millvale Ave."
+      "From Litchfield Towers, head east for 300 ft on Baum Blvd toward Millvale Ave.",
     ],
   );
 
@@ -58,7 +58,9 @@ List<Bus> createBus() {
     currentStop: "Litchfield Towers", //What are we doing with this variable?
     busImage: "Kennywood.png",
     directions: [
-      "1. From Litchfield Towers, head southwest on Fifth Ave toward N Bouquet St\n2.Turn left onto S Bouquet St\n3.Turn left onto Forbes Ave with the destination being the bus stop 'Forbes Ave + S Bouquet' St on the right"
+      "From Litchfield Towers, head southwest on Fifth Ave toward N Bouquet St",
+      "Turn left onto S Bouquet St",
+      "Turn left onto Forbes Ave with the destination being the bus stop 'Forbes Ave + S Bouquet' St on the right",
     ],
   );
 
