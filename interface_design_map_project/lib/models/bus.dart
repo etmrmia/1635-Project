@@ -31,7 +31,7 @@ List<Bus> createBus() {
       source: "Walnut St + Linden",
       destination: "Young St + Yester",
       currentStop: "Walnut St + 27th FS",
-      busImage: "Bus 60.png", //What's this?
+      busImage: "", //What's this?
       directions: [
         "From Litchfield Towers, head east on 5th Ave toward Tennyson Ave.",
       ]);
@@ -66,7 +66,7 @@ List<Bus> createBus() {
 
   Bus busY49 = Bus(
     title: "Y49",
-    alert: "Delayed 5 minutes\nNot crowded",
+    alert: "Delayed 5 minutes\nNot crowded\n""Smithfield St at Fifth Ave is temporarily out of service. New stop at Smithfield St + Forbes Ave",
     arrivalTime: "in 30 minutes",
     source: "Wood & Sixth",
     destination: "CCAC South",
