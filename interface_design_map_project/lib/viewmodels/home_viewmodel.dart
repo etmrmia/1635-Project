@@ -45,7 +45,6 @@ class HomeViewModel extends ChangeNotifier {
     arrivalTime: "n/a",
     source: "n/a",
     destination: "n/a",
-    currentStop: "n/a",
     busImage: "n/a",
     directions: ["N/A"],
   );
@@ -87,6 +86,8 @@ class HomeViewModel extends ChangeNotifier {
   Bus routes(String src, String dest) {
     for (int i = 0; i < _buses.length; i++) {
       if (_buses[i].source == src && _buses[i].destination == dest) {
+        
+        //buses[i].busImage="";
         return buses[i];
       }
     }

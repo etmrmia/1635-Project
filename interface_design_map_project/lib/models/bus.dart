@@ -13,7 +13,6 @@ class Bus extends Routes {
     required this.arrivalTime,
     required this.source,
     required this.destination,
-    currentStop,
     required busImage,
     required this.directions,
   });
@@ -28,9 +27,8 @@ List<Bus> createBus() {
       title: "64",
       alert: "On time",
       arrivalTime: "Arrives in 20 minutes",
-      source: "Walnut St + Linden",
-      destination: "Arsenal Elementary",
-      currentStop: "Walnut St + 27th FS",
+      source: "Arsenal Elementary",
+      destination: "Walnut St + Linden",
       busImage: "Bus 64.png", //What's this?
       directions: [
         "From Litchfield Towers, head east on 5th Ave toward Tennyson Ave."
@@ -42,7 +40,6 @@ List<Bus> createBus() {
     arrivalTime: "Arrives in 20 minutes",
     source: "The Art Institute of Pittsburgh",
     destination: "Monroeville Mall",
-    currentStop: "",
     busImage: "Bus P68.png",
     directions: [
       "From Litchfield Towers, head east for 300 ft on Baum Blvd toward Millvale Ave."
@@ -55,7 +52,6 @@ List<Bus> createBus() {
     arrivalTime: "Arrives in 1 minute.",
     source: "University of Pittsburgh",
     destination: "Kennywood",
-    currentStop: "Litchfield Towers", //What are we doing with this variable?
     busImage: "Kennywood.png",
     directions: [
       "From Litchfield Towers, head southwest on Fifth Ave toward N Bouquet St",
@@ -68,10 +64,9 @@ List<Bus> createBus() {
     title: "Y49",
     alert: "Delayed 5 minutes\nNot crowded\n"
         "Smithfield St at Fifth Ave is temporarily out of service. New stop at Smithfield St + Forbes Ave",
-    arrivalTime: "in 30 minutes",
+    arrivalTime: "In 30 minutes",
     source: "Wood & Sixth",
     destination: "CCAC South",
-    currentStop: "", //What are we doing with this variable?
     busImage: "CCAC.png",
     directions: ["From Litchfield Towers, head..."],
   );
@@ -82,12 +77,20 @@ List<Bus> createBus() {
     arrivalTime: "TBD",
     source: "Market District",
     destination: "323 Negley Ave",
-    currentStop: "", //What are we doing with this variable?
     busImage: "CCAC.png",
     directions: [],
   );
 
-  List<Bus> addBuses = [bus64, bus77, bus61C, busY49, bus71A];
+  Bus bus82= Bus(
+    title:"82",
+    alert:"", 
+    arrivalTime: "", 
+    source: "Market Square", 
+    destination: "Market District Supermarket", 
+    busImage: "Bus 82.png", 
+    directions: [""]);
+
+  List<Bus> addBuses = [bus64, bus77, bus61C, busY49, bus71A, bus82];
 
   return addBuses;
 }
