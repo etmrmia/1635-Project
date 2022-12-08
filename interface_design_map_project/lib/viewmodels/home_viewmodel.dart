@@ -35,6 +35,7 @@ final player = AudioPlayer();
             currentStop: "",
             busImage: "",
             directions: "From Litchfield...."));*/
+final List<Bus> busList = createBus();
 
 class HomeViewModel extends ChangeNotifier {
   //A bus for no bus
@@ -49,7 +50,7 @@ class HomeViewModel extends ChangeNotifier {
     directions: ["N/A"],
   );
 
-  final List<Bus> _buses = createBus();
+  final List<Bus> _buses = busList;
 
   // Retrieve all buses
   List<Bus> get buses => _buses;

@@ -91,6 +91,7 @@ class BusLineView extends StatelessWidget {
               label: line.directions[index],
               child: ListTile(
                 dense: true,
+                leading: Text((index + 1).toString() + "."),
                 contentPadding: const EdgeInsets.symmetric(horizontal: 20),
                 title: Text(
                   line.directions[index],

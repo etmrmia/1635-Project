@@ -29,7 +29,7 @@ List<Bus> createBus() {
       alert: "On time",
       arrivalTime: "Arrives in 20 minutes",
       source: "Walnut St + Linden",
-      destination: "Young St + Yester",
+      destination: "Arsenal Elementary",
       currentStop: "Walnut St + 27th FS",
       busImage: "", //What's this?
       directions: [
@@ -58,13 +58,16 @@ List<Bus> createBus() {
     currentStop: "Litchfield Towers", //What are we doing with this variable?
     busImage: "Kennywood.png",
     directions: [
-      "1. From Litchfield Towers, head southwest on Fifth Ave toward N Bouquet St\n2.Turn left onto S Bouquet St\n3.Turn left onto Forbes Ave with the destination being the bus stop 'Forbes Ave + S Bouquet' St on the right"
+      "From Litchfield Towers, head southwest on Fifth Ave toward N Bouquet St",
+      "Turn left onto S Bouquet St",
+      "Turn left onto Forbes Ave with the destination being the bus stop 'Forbes Ave + S Bouquet' St on the right"
     ],
   );
 
   Bus busY49 = Bus(
     title: "Y49",
-    alert: "Delayed 5 minutes\nNot crowded\n""Smithfield St at Fifth Ave is temporarily out of service. New stop at Smithfield St + Forbes Ave",
+    alert: "Delayed 5 minutes\nNot crowded\n"
+        "Smithfield St at Fifth Ave is temporarily out of service. New stop at Smithfield St + Forbes Ave",
     arrivalTime: "in 30 minutes",
     source: "Wood & Sixth",
     destination: "CCAC South",
