@@ -4,7 +4,7 @@ class Bus extends Routes {
   final String title, alert, arrivalTime;
   String stopChange = "";
   // Routes route;
-  String directions = ""; //walking directions to bus stop
+List<String> directions = []; //walking directions to bus stop
 
   Bus(
       {required this.title,

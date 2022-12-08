@@ -24,31 +24,11 @@ class _HomeViewModelState extends State<HomeViewModel> {
 }*/
 final player = AudioPlayer();
 //   await player.setSource(AssetSource('sounds/coin.wav'));
-final List<Bus> initialData = List.generate(
-    6,
-    (index) => index % 7 == 0
-        /* I think we're going to need individual buses to display,
-        unless we don't care about generic instructions being shared by these random ones. */
-        ? Bus(
-            title: "6$index",
-            alert: "On time",
-            arrivalTime: "in 20 minutes",
-            source: "Walnut St + Linden",
-            destination: "Young St + Yester",
-            currentStop: "Walnut St + 27th FS",
-            busImage: "Bus 60.png",
-            directions:
-                "From Litchfield....", //Same directions for these buses.  Does that matter?
-          )
-        : Bus(
-            title: "8$index",
-            alert: "On time",
-            arrivalTime: "Arrives in 5 minutes",
-            source: "",
-            destination: "",
-            currentStop: "",
-            busImage: "",
-            directions: "From Litchfield...."));
+Bus bus61C = Bus(title: "61C", alert: "on-time, slightly crowded", arrivalTime:"in 1 minute", source: "University of Pittsburgh", destination: "Kennywood", currentStop: "Litchfield Towers", busImage: "Kennywood.png", directions:["From Litchfield towers, head southwest on Fifth Ave toward N Bouquet St", "Turn left onto S Bouquet St", "Turn left onto Forbes Ave with the destination being the bus stop 'Forbes Ave + Bouquet' St on the right"] );
+Bus bus60 = Bus(title: "60", alert: "semi-crowded", arrivalTime: "in 20 minutes", source: "Walnut St + Linden", destination: "Young St + Yester", currentStop: "Walnut St & 27th FS", busImage: "Bus 60.png", directions:[]);
+Bus busY49 = Bus(title: "Y49", alert: "delayed 5 minutes, not crowded",arrivalTime:"in 30 minutes",  source: "Wood & Sixth", destination: "CCAC South", currentStop: "tbd", busImage: "CCAC.png", stopChange: "the bus stop Smithfield St at Fifth Ave is temporarily out of service, please go to Smithfield St + Forbes Ave", directions:[]);
+ Bus noBus = Bus(title: "n/a", alert: "n/a", arrivalTime: "n/a", source: "n/a", destination: "n/a", currentStop: "n/a", busImage: "n/a", directions:[]);
+List<Bus> busData=[bus61C, bus60, busY49, noBus];
 
 class HomeViewModel extends ChangeNotifier {
   Bus bus61C = Bus(
@@ -60,7 +40,7 @@ class HomeViewModel extends ChangeNotifier {
       currentStop: "Litchfield Towers", //What are we doing with this variable?
       busImage: "Kennywood.png",
       directions:
-          "From Litchfield Towers, head southwest on Fifth Ave toward N Bouquet St\nTurn left onto S Bouquet St\nTurn left onto Forbes Ave with the destination being the bus stop 'Forbes Ave + S Bouquet' St on the right",
+          ["From Litchfield Towers, head southwest on Fifth Ave toward N Bouquet St", "Turn left onto S Bouquet St", "Turn left onto Forbes Ave with the destination being the bus stop 'Forbes Ave + S Bouquet' St on the right"],
       stopChange: "No stop changes");
   Bus busY49 = Bus(
       title: "Y49",
@@ -70,7 +50,7 @@ class HomeViewModel extends ChangeNotifier {
       destination: "CCAC South",
       currentStop: "", //What are we doing with this variable?
       busImage: "CCAC.png",
-      directions: "From 5th and Wood, head...",
+      directions: ["From 5th and Wood, head..."],
       stopChange:
           "Smithfield St at Fifth Ave is temporarily out of service\n New stop at Smithfield St + Forbes Ave");
   Bus noBus = Bus(
@@ -81,10 +61,10 @@ class HomeViewModel extends ChangeNotifier {
       destination: "n/a",
       currentStop: "n/a",
       busImage: "n/a",
-      directions: "n/a",
+      directions: ["n/a"],
       stopChange: "n/a");
 
-  final List<Bus> _buses = initialData;
+  final List<Bus> _buses = busData;
 
   // Retrieve all buses
   List<Bus> get buses => _buses;

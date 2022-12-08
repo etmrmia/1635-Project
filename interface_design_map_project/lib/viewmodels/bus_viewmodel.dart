@@ -41,7 +41,7 @@ class BusViewModel extends ChangeNotifier {
     return bus.busImage;
   }
 
-  String get directions {
+ List<String> get directions {
     return bus.directions;
   }
 
