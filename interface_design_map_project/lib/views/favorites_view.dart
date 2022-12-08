@@ -44,7 +44,11 @@ class _FavoritesViewState extends State<FavoritesView> {
       body: Column(
         children: [
           // Search for bus line
-          busLineSearch(viewModel),
+          Semantics(
+            label: "Search bus line",
+            textField: true,
+            child: busLineSearch(viewModel),
+          ),
 
           // Display favorites list
           Expanded(child: favoritesList(favorites)),
@@ -59,13 +63,16 @@ class _FavoritesViewState extends State<FavoritesView> {
       itemCount: favorites.length,
       itemBuilder: (context, index) {
         // final favorited = true;
-        return ListTile(
-          title: Text(
-            favorites[index].title,
+        return Semantics(
+          label: favorites[index].title,
+          child: ListTile(
+            title: Text(
+              favorites[index].title,
+            ),
+            onTap: () {
+              pushBusInfo(favorites[index]);
+            },
           ),
-          onTap: () {
-            pushBusInfo(favorites[index]);
-          },
         );
       },
     );

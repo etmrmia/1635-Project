@@ -28,7 +28,7 @@ class BusLineView extends StatelessWidget {
               return <Widget>[
                 SliverAppBar(
                   floating: true,
-                  expandedHeight: MediaQuery.of(context).size.height * 2 / 3,
+                  expandedHeight: MediaQuery.of(context).size.height * 3 / 5,
                   forceElevated: innerBoxIsScrolled,
                   backgroundColor: Colors.transparent,
                 ),
@@ -51,15 +51,25 @@ class BusLineView extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  titleDisplay("Alert"),
+                  Semantics(
+                    label: "Alert",
+                    child: titleDisplay("Alert"),
+                  ),
                   // Display alert
-                  Text(line.alert),
-                  titleDisplay("Directions"),
+                  Semantics(
+                    label: line.alert,
+                    child: Text(line.alert),
+                  ),
+
+                  Semantics(
+                    label: "Directions",
+                    child: titleDisplay("Directions"),
+                  ),
                   // List of directions
-                  Text(line.directions),
-                  // Stop change(s), if any
-                  // Text(line.stopChange), //Creates an overflow at the bottom
-                  // titleDisplay("Stop Changes"),
+                  Semantics(
+                    label: "Directions",
+                    child: Text(line.directions),
+                  ),
                 ],
               ),
             ),

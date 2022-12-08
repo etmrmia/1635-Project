@@ -51,7 +51,7 @@ class _HomeViewState extends State<HomeView> {
               return <Widget>[
                 SliverAppBar(
                   floating: true,
-                  expandedHeight: MediaQuery.of(context).size.height * 2 / 3,
+                  expandedHeight: MediaQuery.of(context).size.height * 3 / 5,
                   forceElevated: innerBoxIsScrolled,
                   backgroundColor: Colors.transparent,
                 ),
@@ -108,7 +108,11 @@ class _HomeViewState extends State<HomeView> {
           Align(
             alignment: const FractionalOffset(.97, 0.02),
             child: Container(
-              child: favoritesViewButton(context, viewModel),
+              child: Semantics(
+                label: "View List of Favorite Buses",
+                button: true,
+                child: favoritesViewButton(context, viewModel),
+              ),
             ),
           ),
         ],
