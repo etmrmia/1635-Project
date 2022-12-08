@@ -204,7 +204,7 @@ class _HomeViewState extends State<HomeView> {
         onFieldSubmitted: (value) {
           setState(() {
             if (_destination.text.isNotEmpty) {
-              Bus line = vm.routes(_starting.text, _destination.text);
+              Bus line = vm.routes(_starting.text, _destination.text); //no
               pushBusInfo(line);
               _destination.clear();
               _starting.clear();

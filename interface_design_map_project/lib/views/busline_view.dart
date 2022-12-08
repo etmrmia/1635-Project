@@ -56,7 +56,10 @@ class BusLineView extends StatelessWidget {
                   Text(line.alert),
                   titleDisplay("Directions"),
                   // List of directions
-                  Text("direction"),
+                  Text(line.directions),
+                  // Stop change(s), if any
+                  // Text(line.stopChange), //Creates an overflow at the bottom
+                  // titleDisplay("Stop Changes"),
                 ],
               ),
             ),
