@@ -5,7 +5,7 @@ class Bus extends Routes {
   final String title, alert, arrivalTime, source, destination;
   String stopChange = "";
   // Routes route;
-  String directions = ""; //walking directions to bus stop
+  List<String> directions = []; //walking directions to bus stop
 
   Bus({
     required this.title,
@@ -32,8 +32,9 @@ List<Bus> createBus() {
       destination: "Young St + Yester",
       currentStop: "Walnut St + 27th FS",
       busImage: "Bus 60.png", //What's this?
-      directions:
-          "From Litchfield Towers, head east on 5th Ave toward Tennyson Ave.");
+      directions: [
+        "From Litchfield Towers, head east on 5th Ave toward Tennyson Ave."
+      ]);
 
   Bus bus77 = Bus(
     title: "77",
@@ -43,8 +44,9 @@ List<Bus> createBus() {
     destination: "123 Main Street, Monroeville, PA",
     currentStop: "Walnut St + 27th FS",
     busImage: "Bus 60.png",
-    directions:
-        "From Litchfield Towers, head east for 300 ft on Baum Blvd toward Millvale Ave.\n",
+    directions: [
+      "From Litchfield Towers, head east for 300 ft on Baum Blvd toward Millvale Ave."
+    ],
   );
 
   Bus bus61C = Bus(
@@ -55,8 +57,9 @@ List<Bus> createBus() {
     destination: "Kennywood",
     currentStop: "Litchfield Towers", //What are we doing with this variable?
     busImage: "Kennywood.png",
-    directions:
-        "From Litchfield Towers, head southwest on Fifth Ave toward N Bouquet St\nTurn left onto S Bouquet St\nTurn left onto Forbes Ave with the destination being the bus stop 'Forbes Ave + S Bouquet' St on the right",
+    directions: [
+      "1. From Litchfield Towers, head southwest on Fifth Ave toward N Bouquet St\n2.Turn left onto S Bouquet St\n3.Turn left onto Forbes Ave with the destination being the bus stop 'Forbes Ave + S Bouquet' St on the right"
+    ],
   );
 
   Bus busY49 = Bus(
@@ -67,7 +70,7 @@ List<Bus> createBus() {
     destination: "CCAC South",
     currentStop: "", //What are we doing with this variable?
     busImage: "CCAC.png",
-    directions: "From Litchfield Towers, head...",
+    directions: ["From Litchfield Towers, head..."],
   );
 
   Bus bus71A = Bus(
@@ -78,7 +81,7 @@ List<Bus> createBus() {
     destination: "323 Negley Ave",
     currentStop: "", //What are we doing with this variable?
     busImage: "CCAC.png",
-    directions: "From Litchfield Towers, head...",
+    directions: ["From Litchfield Towers, head..."],
   );
 
   List<Bus> addBuses = [bus64, bus77, bus61C, busY49, bus71A];
