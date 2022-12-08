@@ -68,7 +68,7 @@ class BusLineView extends StatelessWidget {
                   // List of directions
                   Semantics(
                     label: "Directions",
-                    child: Text("direction"),
+                    child: Text(line.directions),
                   ),
                 ],
               ),

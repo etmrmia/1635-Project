@@ -25,18 +25,64 @@ class _HomeViewModelState extends State<HomeViewModel> {
 final player = AudioPlayer();
 //   await player.setSource(AssetSource('sounds/coin.wav'));
 final List<Bus> initialData = List.generate(
-    4,
+    6,
     (index) => index % 7 == 0
-        //Have to figure out a way to individualize alerts
-        ?Bus(title: "6$index", alert: "6$index" " - On time.", arrivalTime: "in 20 minutes", source: "Walnut St + Linden", destination: "Young St + Yester", currentStop: "Walnut St + 27th FS", busImage: "Bus 60.png")
-        :Bus(title: "8$index", alert: "8$index" " - On time.", arrivalTime: "in 5 minutes", source: "", destination: "", currentStop: "", busImage: "")
-        );
+        /* I think we're going to need individual buses to display,
+        unless we don't care about generic instructions being shared by these random ones. */
+        ? Bus(
+            title: "6$index",
+            alert: "On time",
+            arrivalTime: "in 20 minutes",
+            source: "Walnut St + Linden",
+            destination: "Young St + Yester",
+            currentStop: "Walnut St + 27th FS",
+            busImage: "Bus 60.png",
+            directions:
+                "From Litchfield....", //Same directions for these buses.  Does that matter?
+          )
+        : Bus(
+            title: "8$index",
+            alert: "On time",
+            arrivalTime: "Arrives in 5 minutes",
+            source: "",
+            destination: "",
+            currentStop: "",
+            busImage: "",
+            directions: "From Litchfield...."));
 
 class HomeViewModel extends ChangeNotifier {
-  Bus bus61C = Bus(title: "61C", alert: "on-time, slightly crowded", arrivalTime:"in 1 minute", source: "University of Pittsburgh", destination: "Kennywood", currentStop: "Litchfield Towers", busImage: "Kennywood.png", directions:["From Litchfield towers, head southwest on Fifth Ave toward N Bouquet St", "Turn left onto S Bouquet St", "Turn left onto Forbes Ave with the destination being the bus stop 'Forbes Ave + Bouquet' St on the right"] );
-  Bus busY49 = Bus(title: "Y49", alert: "delayed 5 minutes, not crowded",arrivalTime:"in 30 minutes",  source: "Wood & Sixth", destination: "CCAC South", currentStop: "tbd", busImage: "CCAC.png", stopChange: "stop Smithfield St at Fifth Ave is temporarily out of service, please go to Smithfield St + Forbes Ave");
-  Bus noBus = Bus(title: "n/a", alert: "n/a", arrivalTime: "n/a", source: "n/a", destination: "n/a", currentStop: "n/a", busImage: "n/a");
-
+  Bus bus61C = Bus(
+      title: "61C",
+      alert: "Scheduled to arrive on time\nBus is slightly crowded",
+      arrivalTime: "Arrives in 1 minute.",
+      source: "University of Pittsburgh",
+      destination: "Kennywood",
+      currentStop: "Litchfield Towers", //What are we doing with this variable?
+      busImage: "Kennywood.png",
+      directions:
+          "From Litchfield Towers, head southwest on Fifth Ave toward N Bouquet St\nTurn left onto S Bouquet St\nTurn left onto Forbes Ave with the destination being the bus stop 'Forbes Ave + S Bouquet' St on the right",
+      stopChange: "No stop changes");
+  Bus busY49 = Bus(
+      title: "Y49",
+      alert: "Delayed 5 minutes\nNot crowded",
+      arrivalTime: "in 30 minutes",
+      source: "Wood & Sixth",
+      destination: "CCAC South",
+      currentStop: "", //What are we doing with this variable?
+      busImage: "CCAC.png",
+      directions: "From 5th and Wood, head...",
+      stopChange:
+          "Smithfield St at Fifth Ave is temporarily out of service\n New stop at Smithfield St + Forbes Ave");
+  Bus noBus = Bus(
+      title: "n/a",
+      alert: "n/a",
+      arrivalTime: "n/a",
+      source: "n/a",
+      destination: "n/a",
+      currentStop: "n/a",
+      busImage: "n/a",
+      directions: "n/a",
+      stopChange: "n/a");
 
   final List<Bus> _buses = initialData;
 
@@ -71,29 +117,11 @@ class HomeViewModel extends ChangeNotifier {
     return noBus;
   }
 
-  //Is the return value displayed at the top of screen?
-  // String routes(String src, String dest) {
-  //   if (src == "University of Pittsburgh" && dest == "Kennywood") {
-  //     return bus61C.title;
-  //   } else if (src == "Wood & Sixth" && dest == "CCAC South") {
-  //     return "Y49 Prospect Flyer";
-  //   } else {
-  //     return "Sorry, no route exists.";
-  //   }
-  // }
-
+  //Just testing
   Bus routes(String src, String dest) {
     if (src == "University of Pittsburgh" && dest == "Kennywood") {
       return bus61C;
-    } else if (src == "Wood & Sixth" && dest == "CCAC South") {
-      return busY49;
-    } else {
-      return noBus;
     }
+    return noBus;
   }
-
-  // String walkingInstructions(String currentStop){
-    
-  //   return "bus61C: instructions";
-  // }
 }
