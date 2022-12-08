@@ -31,19 +31,19 @@ List<Bus> createBus() {
       source: "Walnut St + Linden",
       destination: "Arsenal Elementary",
       currentStop: "Walnut St + 27th FS",
-      busImage: "", //What's this?
+      busImage: "Bus 64.png", //What's this?
       directions: [
         "From Litchfield Towers, head east on 5th Ave toward Tennyson Ave."
       ]);
 
   Bus bus77 = Bus(
-    title: "77",
+    title: "P68",
     alert: "On time",
     arrivalTime: "Arrives in 20 minutes",
-    source: "Institute of Photography",
-    destination: "123 Main Street, Monroeville, PA",
-    currentStop: "Walnut St + 27th FS",
-    busImage: "Bus 60.png",
+    source: "The Art Institute of Pittsburgh",
+    destination: "Monroeville Mall",
+    currentStop: "",
+    busImage: "Bus P68.png",
     directions: [
       "From Litchfield Towers, head east for 300 ft on Baum Blvd toward Millvale Ave."
     ],
@@ -84,7 +84,7 @@ List<Bus> createBus() {
     destination: "323 Negley Ave",
     currentStop: "", //What are we doing with this variable?
     busImage: "CCAC.png",
-    directions: ["From Litchfield Towers, head..."],
+    directions: [],
   );
 
   List<Bus> addBuses = [bus64, bus77, bus61C, busY49, bus71A];

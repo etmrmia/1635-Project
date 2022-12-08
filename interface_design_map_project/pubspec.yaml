@@ -66,7 +66,8 @@ flutter:
    - assets/images/CCAC.png
    - assets/images/Kennywood.png
    - assets/images/Pittsburgh Map.png
-  #  - assets/images/Bus 60.png
+   - assets/images/Bus P68.png
+   - assets/images/Bus 64.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
