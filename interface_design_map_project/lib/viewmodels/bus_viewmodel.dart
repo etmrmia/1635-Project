@@ -45,7 +45,7 @@ class BusViewModel extends ChangeNotifier {
     return bus.directions;
   }
 
-  String get stopChanges {
-    return bus.stopChange;
-  }
+  // String get stopChanges {
+  //   return bus.stopChange;
+  // }
 }

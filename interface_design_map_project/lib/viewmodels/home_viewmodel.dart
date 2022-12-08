@@ -39,7 +39,7 @@ Bus bus61C = Bus(
     ]);
 Bus bus60 = Bus(
     title: "60",
-    alert: "semi-crowded",
+    alert: "Semi-crowded\n" "The bus stop Smithfield St at Fifth Ave is temporarily out of service, please go to Smithfield St + Forbes Ave",
     arrivalTime: "in 20 minutes",
     source: "Walnut St + Linden",
     destination: "Young St + Yester",
@@ -54,8 +54,6 @@ Bus busY49 = Bus(
     destination: "CCAC South",
     currentStop: "tbd",
     busImage: "CCAC.png",
-    stopChange:
-        "the bus stop Smithfield St at Fifth Ave is temporarily out of service, please go to Smithfield St + Forbes Ave",
     directions: ["From 5th and Wood, head..."]);
 Bus noBus = Bus(
     title: "n/a",
@@ -82,18 +80,17 @@ class HomeViewModel extends ChangeNotifier {
         "Turn left onto S Bouquet St",
         "Turn left onto Forbes Ave with the destination being the bus stop 'Forbes Ave + S Bouquet' St on the right"
       ],
-      stopChange: "No stop changes");
+      );
   Bus busY49 = Bus(
       title: "Y49",
-      alert: "Delayed 5 minutes\nNot crowded",
+      alert: "Delayed 5 minutes\nNot crowded\n""Smithfield St at Fifth Ave is temporarily out of service. New stop at Smithfield St + Forbes Ave",
       arrivalTime: "in 30 minutes",
       source: "Wood & Sixth",
       destination: "CCAC South",
       currentStop: "", //What are we doing with this variable?
       busImage: "CCAC.png",
       directions: ["From 5th and Wood, head..."],
-      stopChange:
-          "Smithfield St at Fifth Ave is temporarily out of service\n New stop at Smithfield St + Forbes Ave");
+    );
   Bus noBus = Bus(
       title: "n/a",
       alert: "n/a",
@@ -103,7 +100,7 @@ class HomeViewModel extends ChangeNotifier {
       currentStop: "n/a",
       busImage: "n/a",
       directions: ["n/a"],
-      stopChange: "n/a");
+     );
 
   final List<Bus> _buses = busData;
 
@@ -140,9 +137,17 @@ class HomeViewModel extends ChangeNotifier {
 
   //Just testing
   Bus routes(String src, String dest) {
-    if (src == "University of Pittsburgh" && dest == "Kennywood") {
-      return bus61C;
+   for (Bus bus in busData){
+      if (bus.source=="University of Pittsburgh" && bus.destination=="Kennywood"){
+        return bus61C;
+      }
+      else if (bus.source=="Wood & Sixth" && bus.destination=="CCAC South"){
+        return busY49;
+      }
+      else if (bus.source=="Walnut St + Linden" && bus.destination=="Young St + Yester"){
+        return bus60;
+      }
+
     }
-    return noBus;
-  }
+    return noBus; //no match
 }
