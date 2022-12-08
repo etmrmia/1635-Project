@@ -50,7 +50,7 @@ class BusLineView extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: displayDirections(line, isSearched, context)),
+                child: displayDirections(context)),
           ),
         ],
       ),
@@ -80,7 +80,7 @@ class BusLineView extends StatelessWidget {
     );
   }
 
-  busDirections(Bus line, BuildContext context) {
+  busDirections(BuildContext context) {
     return SingleChildScrollView(
       child: SizedBox(
         height: MediaQuery.of(context).size.height / 2,
@@ -105,7 +105,7 @@ class BusLineView extends StatelessWidget {
     );
   }
 
-  displayDirections(Bus line, isSearched, BuildContext context) {
+  displayDirections(BuildContext context) {
     if (isSearched) {
       return Column(
         children: [
@@ -115,6 +115,7 @@ class BusLineView extends StatelessWidget {
             child: titleDisplay("Alert"),
           ),
           // Display alert
+
           Semantics(
             label: line.alert,
             child: Text(
@@ -122,6 +123,15 @@ class BusLineView extends StatelessWidget {
               style: const TextStyle(fontSize: 14),
             ),
           ),
+          const Divider(),
+          Semantics(
+            label: line.arrivalTime,
+            child: Text(
+              line.arrivalTime,
+              style: const TextStyle(fontSize: 14),
+            ),
+          ),
+
           const Divider(),
           const Divider(
             thickness: 1,
@@ -135,7 +145,7 @@ class BusLineView extends StatelessWidget {
           ),
           // List of directions
           Expanded(
-            child: busDirections(line, context),
+            child: busDirections(context),
           ),
         ],
       );

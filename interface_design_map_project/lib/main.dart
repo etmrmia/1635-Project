@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "Map App",
       debugShowCheckedModeBanner: false,
+      // showSemanticsDebugger: true,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
