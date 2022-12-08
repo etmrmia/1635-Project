@@ -39,15 +39,15 @@ final player = AudioPlayer();
 class HomeViewModel extends ChangeNotifier {
   //A bus for no bus
   Bus noBus = Bus(
-      title: "n/a",
-      alert: "n/a",
-      arrivalTime: "n/a",
-      source: "n/a",
-      destination: "n/a",
-      currentStop: "n/a",
-      busImage: "n/a",
-      directions: "n/a",
-      stopChange: "n/a");
+    title: "n/a",
+    alert: "n/a",
+    arrivalTime: "n/a",
+    source: "n/a",
+    destination: "n/a",
+    currentStop: "n/a",
+    busImage: "n/a",
+    directions: "n/a",
+  );
 
   final List<Bus> _buses = createBus();
 

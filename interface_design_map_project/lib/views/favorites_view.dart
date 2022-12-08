@@ -79,8 +79,11 @@ class _FavoritesViewState extends State<FavoritesView> {
   }
 
   pushBusInfo(Bus line) {
-    return Navigator.of(context).push(
-        MaterialPageRoute<void>(builder: (context) => BusLineView(line: line)));
+    return Navigator.of(context).push(MaterialPageRoute<void>(
+        builder: (context) => BusLineView(
+              line: line,
+              isSearched: false,
+            )));
   }
 
   // Search by busline method

@@ -10,7 +10,8 @@ import '../models/bus.dart';
 
 class BusLineView extends StatelessWidget {
   final Bus line;
-  const BusLineView({super.key, required this.line});
+  final bool isSearched;
+  const BusLineView({super.key, required this.line, required this.isSearched});
 
   @override
   Widget build(BuildContext context) {
@@ -36,43 +37,20 @@ class BusLineView extends StatelessWidget {
             },
             // Information Section
             body: Container(
-              padding: const EdgeInsets.only(bottom: 20),
-              height: MediaQuery.of(context).size.height / 2,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey,
-                    blurRadius: 9,
-                    spreadRadius: 3,
-                    offset: Offset(5, 5),
-                  ),
-                ],
-              ),
-              child: Column(
-                children: [
-                  Semantics(
-                    label: "Alert",
-                    child: titleDisplay("Alert"),
-                  ),
-                  // Display alert
-                  Semantics(
-                    label: line.alert,
-                    child: Text(line.alert),
-                  ),
-
-                  Semantics(
-                    label: "Directions",
-                    child: titleDisplay("Directions"),
-                  ),
-                  // List of directions
-                  Semantics(
-                    label: "Directions",
-                    child: Text(line.directions),
-                  ),
-                ],
-              ),
-            ),
+                padding: const EdgeInsets.only(bottom: 20),
+                height: MediaQuery.of(context).size.height / 2,
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      blurRadius: 9,
+                      spreadRadius: 3,
+                      offset: Offset(5, 5),
+                    ),
+                  ],
+                ),
+                child: displayDirections(line, isSearched, context)),
           ),
         ],
       ),
@@ -100,5 +78,84 @@ class BusLineView extends StatelessWidget {
         style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
       ),
     );
+  }
+
+  busDirections(Bus line, BuildContext context) {
+    return SingleChildScrollView(
+      child: SizedBox(
+        height: MediaQuery.of(context).size.height / 2,
+        child: ListView.builder(
+          itemCount: line.directions.length,
+          itemBuilder: (context, index) {
+            return Semantics(
+              label: line.directions[index],
+              child: ListTile(
+                dense: true,
+                contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+                title: Text(
+                  line.directions[index],
+                  style: const TextStyle(fontSize: 14),
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  displayDirections(Bus line, isSearched, BuildContext context) {
+    if (isSearched) {
+      return Column(
+        children: [
+          const Divider(height: 7),
+          Semantics(
+            label: "Alert",
+            child: titleDisplay("Alert"),
+          ),
+          // Display alert
+          Semantics(
+            label: line.alert,
+            child: Text(
+              line.alert,
+              style: const TextStyle(fontSize: 14),
+            ),
+          ),
+          const Divider(),
+          const Divider(
+            thickness: 1,
+            indent: 20,
+            color: Colors.grey,
+            endIndent: 20,
+          ),
+          Semantics(
+            label: "Directions",
+            child: titleDisplay("Directions"),
+          ),
+          // List of directions
+          Expanded(
+            child: busDirections(line, context),
+          ),
+        ],
+      );
+    } else {
+      return Column(
+        children: [
+          const Divider(height: 7),
+          Semantics(
+            label: "Alert",
+            child: titleDisplay("Alert"),
+          ),
+          // Display alert
+          Semantics(
+            label: line.alert,
+            child: Text(
+              line.alert,
+              style: const TextStyle(fontSize: 14),
+            ),
+          ),
+        ],
+      );
+    }
   }
 }

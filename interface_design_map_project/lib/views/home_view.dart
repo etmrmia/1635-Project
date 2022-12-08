@@ -209,7 +209,7 @@ class _HomeViewState extends State<HomeView> {
           setState(() {
             if (_destination.text.isNotEmpty) {
               Bus line = vm.routes(_starting.text, _destination.text); //no
-              pushBusInfo(line);
+              pushBusInfo(line, true);
               _destination.clear();
               _starting.clear();
             }
@@ -220,9 +220,12 @@ class _HomeViewState extends State<HomeView> {
   }
 
   // Push bus info view
-  pushBusInfo(Bus line) {
-    return Navigator.of(context).push(
-        MaterialPageRoute<void>(builder: (context) => BusLineView(line: line)));
+  pushBusInfo(Bus line, bool isSearched) {
+    return Navigator.of(context).push(MaterialPageRoute<void>(
+        builder: (context) => BusLineView(
+              line: line,
+              isSearched: isSearched,
+            )));
   }
 
 // Display list of buses
@@ -258,7 +261,7 @@ class _HomeViewState extends State<HomeView> {
                   },
                 ),
                 onTap: () {
-                  pushBusInfo(vm.buses[index]);
+                  pushBusInfo(vm.buses[index], false);
                   //Navigator.pushNamed(context, buslineinfoRoute);
                 },
               ),

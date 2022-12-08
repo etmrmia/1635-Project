@@ -7,16 +7,16 @@ class Bus extends Routes {
   // Routes route;
   String directions = ""; //walking directions to bus stop
 
-  Bus(
-      {required this.title,
-      required this.alert,
-      required this.arrivalTime,
-      required this.source,
-      required this.destination,
-      currentStop,
-      required busImage,
-      required this.directions,
-      stopChange});
+  Bus({
+    required this.title,
+    required this.alert,
+    required this.arrivalTime,
+    required this.source,
+    required this.destination,
+    currentStop,
+    required busImage,
+    required this.directions,
+  });
 }
 
 List<Bus> createBus() {
@@ -48,28 +48,27 @@ List<Bus> createBus() {
   );
 
   Bus bus61C = Bus(
-      title: "61C",
-      alert: "Scheduled to arrive on time\nBus is slightly crowded",
-      arrivalTime: "Arrives in 1 minute.",
-      source: "University of Pittsburgh",
-      destination: "Kennywood",
-      currentStop: "Litchfield Towers", //What are we doing with this variable?
-      busImage: "Kennywood.png",
-      directions:
-          "From Litchfield Towers, head southwest on Fifth Ave toward N Bouquet St\nTurn left onto S Bouquet St\nTurn left onto Forbes Ave with the destination being the bus stop 'Forbes Ave + S Bouquet' St on the right",
-      stopChange: "No stop changes");
+    title: "61C",
+    alert: "Scheduled to arrive on time\nBus is slightly crowded",
+    arrivalTime: "Arrives in 1 minute.",
+    source: "University of Pittsburgh",
+    destination: "Kennywood",
+    currentStop: "Litchfield Towers", //What are we doing with this variable?
+    busImage: "Kennywood.png",
+    directions:
+        "From Litchfield Towers, head southwest on Fifth Ave toward N Bouquet St\nTurn left onto S Bouquet St\nTurn left onto Forbes Ave with the destination being the bus stop 'Forbes Ave + S Bouquet' St on the right",
+  );
 
   Bus busY49 = Bus(
-      title: "Y49",
-      alert: "Delayed 5 minutes\nNot crowded",
-      arrivalTime: "in 30 minutes",
-      source: "Wood & Sixth",
-      destination: "CCAC South",
-      currentStop: "", //What are we doing with this variable?
-      busImage: "CCAC.png",
-      directions: "From Litchfield Towers, head...",
-      stopChange:
-          "Smithfield St at Fifth Ave is temporarily out of service.  New stop at Smithfield St + Forbes Ave");
+    title: "Y49",
+    alert: "Delayed 5 minutes\nNot crowded",
+    arrivalTime: "in 30 minutes",
+    source: "Wood & Sixth",
+    destination: "CCAC South",
+    currentStop: "", //What are we doing with this variable?
+    busImage: "CCAC.png",
+    directions: "From Litchfield Towers, head...",
+  );
 
   Bus bus71A = Bus(
     title: "71A",
@@ -80,7 +79,6 @@ List<Bus> createBus() {
     currentStop: "", //What are we doing with this variable?
     busImage: "CCAC.png",
     directions: "From Litchfield Towers, head...",
-    stopChange: "N/A",
   );
 
   List<Bus> addBuses = [bus64, bus77, bus61C, busY49, bus71A];
