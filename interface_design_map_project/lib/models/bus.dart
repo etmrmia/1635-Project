@@ -31,7 +31,7 @@ List<Bus> createBus() {
       alert: "On time",
       arrivalTime: "Arrives in 20 minutes",
       source: "Arsenal Elementary",
-      destination: "Walnut St + Linden",
+      destination: "Bank of America",
       busImage: "Bus 64.png",
       directions: [
         "From Arsenal Elementary School, walk to 39th St + Butler",
@@ -39,9 +39,9 @@ List<Bus> createBus() {
         "Get off at Walnut St + S Negley Ave"
       ],
       times: [
-        "3:15",
-        "3:41",
-        "4:02"
+        "3:15 pm",
+        "3:41 pm",
+        "4:02 pm"
       ]);
 
   Bus busP68 = Bus(
@@ -59,11 +59,11 @@ List<Bus> createBus() {
         "Get off at Monroeville Mall, 200 Mall Cir Dr, Monroeville, PA 15146"
       ],
       times: [
-        "2:47",
-        "2:55",
-        "3:00",
-        "3:09",
-        "4:23"
+        "2:47 pm",
+        "2:55 pm",
+        "3:00 pm",
+        "3:09 pm",
+        "4:23 pm"
       ]);
 
   Bus bus61C = Bus(
@@ -81,11 +81,11 @@ List<Bus> createBus() {
         "Get off at Kennywood Blvd + Hoffman Ave",
       ],
       times: [
-        "1:20",
-        "1:23",
-        "1:25",
-        "1:32",
-        "2:06"
+        "1:20 pm",
+        "1:23 pm",
+        "1:25 pm",
+        "1:32 pm",
+        "2:06 pm"
       ]);
 
   Bus busY49 = Bus(
@@ -102,9 +102,9 @@ List<Bus> createBus() {
         "Get off at South Campus Driveway + Library Entrance",
       ],
       times: [
-        "7:11",
-        "7:13",
-        "8:02"
+        "7:11 pm",
+        "7:13 pm",
+        "8:02 pm"
       ]);
 
   Bus bus71A = Bus(
@@ -131,10 +131,10 @@ List<Bus> createBus() {
         "Get off at Centre Ave + Negley Ave (Market District)"
       ],
       times: [
-        "4:05",
-        "4:07",
-        "4:23",
-        "4:50"
+        "4:05 pm",
+        "4:07 pm",
+        "4:23 pm",
+        "4:50 pm"
       ]);
 
   List<Bus> addBuses = [bus64, busP68, bus61C, busY49, bus71A, bus82];
