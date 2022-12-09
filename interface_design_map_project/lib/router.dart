@@ -17,18 +17,6 @@ class Router {
                   create: (context) => HomeViewModel(),
                   child: HomeView(),
                 ));
-      // case favoritesRoute:
-      //   return MaterialPageRoute(
-      //       builder: (_) => ChangeNotifierProvider(
-      //             create: (context) => HomeViewModel(),
-      //             child: FavoritesView(),
-      //           ));
-      // case buslineinfoRoute:
-      //   return MaterialPageRoute(
-      //       builder: (_) => ChangeNotifierProvider(
-      //             create: (context) => HomeViewModel(),
-      //             child: BusLineView(),
-      //           ));
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(

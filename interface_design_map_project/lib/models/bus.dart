@@ -77,7 +77,7 @@ List<Bus> createBus() {
     arrivalTime: "TBD",
     source: "Market District",
     destination: "323 Negley Ave",
-    busImage: "CCAC.png",
+    busImage: "Out of Service.png",
     directions: [],
   );
 
