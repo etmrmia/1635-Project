@@ -97,6 +97,7 @@ class BusLineView extends StatelessWidget {
                   line.directions[index],
                   style: const TextStyle(fontSize: 14),
                 ),
+                trailing: Text(line.times[index]),
               ),
             );
           },

@@ -42,11 +42,12 @@ class HomeViewModel extends ChangeNotifier {
   Bus noBus = Bus(
     title: "No bus exists for this route",
     alert: "N/A",
-    arrivalTime: "n/a",
-    source: "n/a",
-    destination: "n/a",
-    busImage: "n/a",
+    arrivalTime: "N/A",
+    source: "N/A",
+    destination: "N/A",
+    busImage: "N/A",
     directions: ["N/A"],
+    times: ["n/a"],
   );
 
   final List<Bus> _buses = busList;
@@ -86,7 +87,6 @@ class HomeViewModel extends ChangeNotifier {
   Bus routes(String src, String dest) {
     for (int i = 0; i < _buses.length; i++) {
       if (_buses[i].source == src && _buses[i].destination == dest) {
-        
         //buses[i].busImage="";
         return buses[i];
       }
