@@ -33,7 +33,7 @@ List<Bus> createBus() {
   //Parent persona
   Bus bus64 = Bus(
       title: "64 Lawrenceville",
-      alert: "On time",
+      alert: "On time\n" "Bus is 25 percent full",
       arrivalTime: "Arrives in 20 minutes",
       source: "Arsenal Elementary",
       destination: "Bank of America",
@@ -52,7 +52,7 @@ List<Bus> createBus() {
 
   Bus busP68 = Bus(
       title: "P68 Braddock Hills Flyer",
-      alert: "On time",
+      alert: "On time \n" "Bus is overcrowded",
       arrivalTime: "Arrives in 20 minutes",
       source: "Art Institute",
       destination: "Monroeville Mall",
@@ -100,7 +100,7 @@ List<Bus> createBus() {
       title: "Y49 IP Prospect Flyer",
       alert: "Delayed 5 minutes\nNot crowded\n"
           "Smithfield St at Fifth Ave is temporarily out of service. New stop at Smithfield St + Forbes Ave",
-      arrivalTime: "In 30 minutes",
+      arrivalTime: "Arrives in 30 minutes",
       source: "Wood St",
       destination: "CCAC South",
       homeBusImage: "Home Page Bus Y49.png",
@@ -129,7 +129,7 @@ List<Bus> createBus() {
 
   Bus bus82 = Bus(
       title: "82 Lincoln",
-      alert: "On time",
+      alert: "On time\n" "Bus is 10 percent full.",
       arrivalTime: "Arrives in 1 minute",
       source: "Market Square",
       destination: "Market District",
