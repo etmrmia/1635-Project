@@ -20,8 +20,8 @@ class HomeViewModel extends ChangeNotifier {
     arrivalTime: "N/A",
     source: "N/A",
     destination: "N/A",
-    homeBusImage: "N/A",
-    routeBusImage: "N/A",
+    homeBusImage: "Out of Service.png",
+    routeBusImage: "Out of Service.png",
     directions: ["N/A"],
     times: ["N/A"],
   );

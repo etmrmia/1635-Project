@@ -29,7 +29,8 @@ class BusLineView extends StatelessWidget {
               return <Widget>[
                 SliverAppBar(
                   floating: true,
-                  expandedHeight: MediaQuery.of(context).size.height * 3 / 5,
+                  expandedHeight:
+                      MediaQuery.of(context).size.height * 3 / 5 - 30,
                   forceElevated: innerBoxIsScrolled,
                   backgroundColor: Colors.transparent,
                 ),
