@@ -12,7 +12,8 @@ class Bus {
     required this.arrivalTime,
     required this.source,
     required this.destination,
-    required busImage,
+    required homeBusImage,
+    required routeBusImage,
     required this.directions,
     required this.times,
   });
@@ -30,7 +31,8 @@ List<Bus> createBus() {
       arrivalTime: "Arrives in 20 minutes",
       source: "Arsenal Elementary",
       destination: "Bank of America",
-      busImage: "Bus 64.png",
+      homeBusImage: "Home Page Bus 64.png",
+      routeBusImage: "Bus 64.png",
       directions: [
         "From Arsenal Elementary School, walk to 39th St + Butler",
         "Board on 39th + Butler",
@@ -48,7 +50,8 @@ List<Bus> createBus() {
       arrivalTime: "Arrives in 20 minutes",
       source: "Art Institute",
       destination: "Monroeville Mall",
-      busImage: "Bus P68.png",
+      homeBusImage: "Home Page Bus P68.png",
+      routeBusImage: "Bus P68.png",
       directions: [
         "From 225 Penn Ave, head southwest on Penn Ave toward 14th St",
         "Turn left onto 11th St",
@@ -70,7 +73,8 @@ List<Bus> createBus() {
       arrivalTime: "Arrives in 1 minute.",
       source: "University of Pittsburgh",
       destination: "Kennywood",
-      busImage: "Kennywood.png",
+      homeBusImage: "Home Page Bus 61C.png",
+      routeBusImage: "Kennywood.png",
       directions: [
         "From Litchfield Towers, head southwest on Fifth Ave toward N Bouquet St",
         "Turn left onto S Bouquet St",
@@ -93,7 +97,8 @@ List<Bus> createBus() {
       arrivalTime: "In 30 minutes",
       source: "Wood St",
       destination: "CCAC South",
-      busImage: "CCAC.png",
+      homeBusImage: "Home Page Bus Y49.png",
+      routeBusImage: "CCAC.png",
       directions: [
         "From Wood St + 5th Ave, walk toward Wood St + 6th Ave",
         "Board at Wood St + 6th Ave",
@@ -111,7 +116,8 @@ List<Bus> createBus() {
       arrivalTime: "TBD",
       source: "Market District",
       destination: "323 Negley Ave",
-      busImage: "Out of Service.png",
+      homeBusImage: "Out of Service.png",
+      routeBusImage: "Out of Service.png",
       directions: ["Sorry, no directions are available for this route."],
       times: ["TBD"]);
 
@@ -121,7 +127,8 @@ List<Bus> createBus() {
       arrivalTime: "Arrives in 1 minute",
       source: "Market Square",
       destination: "Market District",
-      busImage: "Bus 82.png",
+      homeBusImage: "Home Page Bus 82.png",
+      routeBusImage: "Bus 82.png",
       directions: [
         "From Market Square, head northwest toward Market St",
         "Turn right onto Market St",

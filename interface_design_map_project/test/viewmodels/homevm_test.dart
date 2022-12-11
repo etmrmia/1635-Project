@@ -12,7 +12,8 @@ void main() {
       arrivalTime: "test time",
       source: "Pittsburgh",
       destination: "Biloxi",
-      busImage: "None",
+      homeBusImage: "None",
+      routeBusImage: "None",
       directions: ["Drive south"],
       times: ["18 hours"]);
 
