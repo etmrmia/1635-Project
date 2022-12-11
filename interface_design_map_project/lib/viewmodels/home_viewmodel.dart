@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import '../models/bus.dart';
-import '../views/busline_view.dart';
-import '../views/favorites_view.dart';
-import '../views/home_view.dart';
-import 'package:provider/provider.dart';
 import 'package:audioplayers/audioplayers.dart';
 
 final player = AudioPlayer();

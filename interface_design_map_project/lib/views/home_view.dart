@@ -1,12 +1,8 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import '../constants.dart';
 import 'busline_view.dart';
 import 'favorites_view.dart';
-import 'home_view.dart';
 import '../viewmodels/home_viewmodel.dart';
 import '../models/bus.dart';
-import '../router.dart';
 import 'package:provider/provider.dart';
 
 class HomeView extends StatefulWidget {

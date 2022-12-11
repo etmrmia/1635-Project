@@ -1,5 +1,4 @@
 class Bus {
-  @override
   final String title,
       alert,
       arrivalTime,

@@ -1,11 +1,4 @@
 import 'package:flutter/material.dart';
-import '../constants.dart';
-import 'busline_view.dart';
-import 'favorites_view.dart';
-import 'home_view.dart';
-import '../viewmodels/home_viewmodel.dart';
-import '../router.dart';
-import 'package:provider/provider.dart';
 import '../models/bus.dart';
 
 class BusLineView extends StatelessWidget {
@@ -173,13 +166,10 @@ class BusLineView extends StatelessWidget {
   }
 
   displayAlert() {
-    return Flexible(
-      fit: FlexFit.tight,
-      child: Text(
-        line.alert,
-        textAlign: TextAlign.center,
-        style: const TextStyle(fontSize: 14),
-      ),
+    return Text(
+      line.alert,
+      textAlign: TextAlign.center,
+      style: const TextStyle(fontSize: 14),
     );
   }
 }
