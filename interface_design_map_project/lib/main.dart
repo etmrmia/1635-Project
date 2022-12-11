@@ -13,7 +13,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "Map App",
       debugShowCheckedModeBanner: false,
-      // showSemanticsDebugger: true,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -22,7 +21,6 @@ class MyApp extends StatelessWidget {
         child: HomeView(),
       ),
       onGenerateRoute: LocalRouter.Router.generateRoute,
-      // initialRoute: homeRoute,
     );
   }
 }

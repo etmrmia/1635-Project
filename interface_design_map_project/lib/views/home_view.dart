@@ -71,8 +71,10 @@ class _HomeViewState extends State<HomeView> {
               child: Column(
                 children: [
                   const Divider(),
+                  // PRT Phone number
                   Semantics(
-                    label: "Pittsburgh Regional Transit Phone Number",
+                    label:
+                        "Pittsburgh Regional Transit Phone Number: 1 (412) 442-2000",
                     child: const Text(
                         "Pittsburgh Regional Transit: 1 (412) 442-2000"),
                   ),

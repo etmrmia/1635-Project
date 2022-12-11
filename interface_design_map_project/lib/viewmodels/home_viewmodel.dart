@@ -4,8 +4,6 @@ import 'package:audioplayers/audioplayers.dart';
 
 final player = AudioPlayer();
 
-//   await player.setSource(AssetSource('sounds/coin.wav'));
-
 final List<Bus> busList = createBus();
 
 class HomeViewModel extends ChangeNotifier {
@@ -55,7 +53,7 @@ class HomeViewModel extends ChangeNotifier {
     return noBus;
   }
 
-  //Just testing
+  // Returns bus from source and destination
   Bus routes(String src, String dest) {
     for (int i = 0; i < _buses.length; i++) {
       if (_buses[i].source == src && _buses[i].destination == dest) {

@@ -81,6 +81,7 @@ class BusLineView extends StatelessWidget {
     );
   }
 
+  // Display list of bus directions
   busDirections(BuildContext context) {
     return SingleChildScrollView(
       child: SizedBox(
@@ -107,6 +108,7 @@ class BusLineView extends StatelessWidget {
     );
   }
 
+  // Different displays based on isSearched
   displayDirections(BuildContext context) {
     if (isSearched) {
       return Column(
@@ -165,6 +167,7 @@ class BusLineView extends StatelessWidget {
     }
   }
 
+  // Alert Display
   displayAlert() {
     return Text(
       line.alert,

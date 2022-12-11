@@ -74,6 +74,7 @@ class _FavoritesViewState extends State<FavoritesView> {
     );
   }
 
+  // Navigate to detailed bus info
   pushBusInfo(Bus line) {
     return Navigator.of(context).push(MaterialPageRoute<void>(
         builder: (context) => BusLineView(
