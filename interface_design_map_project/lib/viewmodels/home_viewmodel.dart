@@ -10,31 +10,6 @@ final player = AudioPlayer();
 
 //   await player.setSource(AssetSource('sounds/coin.wav'));
 
-/*final List<Bus> initialData = List.generate(
-    6,
-    (index) => index % 7 == 0
-        /* I think we're going to need individual buses to display,
-        unless we don't care about generic instructions being shared by these random ones. */
-        ? Bus(
-            title: "6$index",
-            alert: "On time",
-            arrivalTime: "Arrives in 20 minutes",
-            source: "Walnut St + Linden",
-            destination: "Young St + Yester",
-            currentStop: "Walnut St + 27th FS",
-            busImage: "Bus 60.png",
-            directions:
-                "From Litchfield....", //Same directions for these buses.  Does that matter?
-          )
-        : Bus(
-            title: "8$index",
-            alert: "On time",
-            arrivalTime: "Arrives in 5 minutes",
-            source: "",
-            destination: "",
-            currentStop: "",
-            busImage: "",
-            directions: "From Litchfield...."));*/
 final List<Bus> busList = createBus();
 
 class HomeViewModel extends ChangeNotifier {
@@ -42,11 +17,12 @@ class HomeViewModel extends ChangeNotifier {
   Bus noBus = Bus(
     title: "No bus exists for this route",
     alert: "N/A",
-    arrivalTime: "n/a",
-    source: "n/a",
-    destination: "n/a",
-    busImage: "n/a",
+    arrivalTime: "N/A",
+    source: "N/A",
+    destination: "N/A",
+    busImage: "N/A",
     directions: ["N/A"],
+    times: ["N/A"],
   );
 
   final List<Bus> _buses = busList;
@@ -86,7 +62,6 @@ class HomeViewModel extends ChangeNotifier {
   Bus routes(String src, String dest) {
     for (int i = 0; i < _buses.length; i++) {
       if (_buses[i].source == src && _buses[i].destination == dest) {
-        
         //buses[i].busImage="";
         return buses[i];
       }
