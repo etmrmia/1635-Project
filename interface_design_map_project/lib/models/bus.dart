@@ -1,6 +1,12 @@
 class Bus {
   @override
-  final String title, alert, arrivalTime, source, destination;
+  final String title,
+      alert,
+      arrivalTime,
+      source,
+      destination,
+      homeBusImage,
+      routeBusImage;
   String stopChange = "";
   // Routes route;
   List<String> directions = []; //walking directions to bus stop
@@ -12,8 +18,8 @@ class Bus {
     required this.arrivalTime,
     required this.source,
     required this.destination,
-    required homeBusImage,
-    required routeBusImage,
+    required this.homeBusImage,
+    required this.routeBusImage,
     required this.directions,
     required this.times,
   });

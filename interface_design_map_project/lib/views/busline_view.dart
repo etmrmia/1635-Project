@@ -59,11 +59,18 @@ class BusLineView extends StatelessWidget {
 
   // Display map
   map(BuildContext context) {
+    String image;
+    if (isSearched) {
+      image = "assets/images/" + line.routeBusImage;
+    } else {
+      image = "assets/images/" + line.homeBusImage;
+    }
+
     return Container(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       child: Image.asset(
-        'assets/images/CCAC.png',
+        image,
         fit: BoxFit.fitHeight,
       ),
     );
@@ -116,13 +123,9 @@ class BusLineView extends StatelessWidget {
             child: titleDisplay("Alert"),
           ),
           // Display alert
-
           Semantics(
             label: line.alert,
-            child: Text(
-              line.alert,
-              style: const TextStyle(fontSize: 14),
-            ),
+            child: displayAlert(),
           ),
           const Divider(),
           Semantics(
@@ -161,13 +164,21 @@ class BusLineView extends StatelessWidget {
           // Display alert
           Semantics(
             label: line.alert,
-            child: Text(
-              line.alert,
-              style: const TextStyle(fontSize: 14),
-            ),
+            child: displayAlert(),
           ),
         ],
       );
     }
+  }
+
+  displayAlert() {
+    return Flexible(
+      fit: FlexFit.tight,
+      child: Text(
+        line.alert,
+        textAlign: TextAlign.center,
+        style: const TextStyle(fontSize: 14),
+      ),
+    );
   }
 }

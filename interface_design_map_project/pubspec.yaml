@@ -75,7 +75,7 @@ flutter:
    - assets/images/Home Page Bus 71A.png
    - assets/images/Home Page Bus 82.png
    - assets/images/Home Page Bus P68.png
-   assets/images/Home Page Bus Y49.png
+   - assets/images/Home Page Bus Y49.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
