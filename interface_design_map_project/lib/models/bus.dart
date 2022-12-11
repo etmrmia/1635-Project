@@ -1,6 +1,4 @@
-import 'package:interface_design_map_project/models/routes.dart';
-
-class Bus extends Routes {
+class Bus {
   @override
   final String title, alert, arrivalTime, source, destination;
   String stopChange = "";

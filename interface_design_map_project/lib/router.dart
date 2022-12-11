@@ -5,7 +5,6 @@ import 'views/busline_view.dart';
 import 'views/favorites_view.dart';
 import 'views/home_view.dart';
 import 'viewmodels/home_viewmodel.dart';
-import 'viewmodels/bus_viewmodel.dart';
 import 'router.dart';
 
 class Router {
