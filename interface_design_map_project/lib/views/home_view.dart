@@ -74,6 +74,13 @@ class _HomeViewState extends State<HomeView> {
               ),
               child: Column(
                 children: [
+                  const Divider(),
+                  Semantics(
+                    label: "Pittsburgh Regional Transit Phone Number",
+                    child: const Text(
+                        "Pittsburgh Regional Transit: 1 (412) 442-2000"),
+                  ),
+
                   // Search Bars
                   Semantics(
                     label: "Search starting location",

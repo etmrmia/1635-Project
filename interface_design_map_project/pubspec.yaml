@@ -70,11 +70,11 @@ flutter:
    - assets/images/Bus 64.png
    - assets/images/Bus 82.png
    - assets/images/Out of Service.png
-   - assets/images/Home Page Bus61C.png
-   - assets/images/Home Page Bus64.png
-   - assets/images/Home Page Bus71A.png
-   - assets/images/Home Page Bus82.png
-   - assets/images/Home Page BusP68.png
+   - assets/images/Home Page Bus 61C.png
+   - assets/images/Home Page Bus 64.png
+   - assets/images/Home Page Bus 71A.png
+   - assets/images/Home Page Bus 82.png
+   - assets/images/Home Page Bus P68.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
