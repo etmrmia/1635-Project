@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import '../models/bus.dart';
-import 'package:audioplayers/audioplayers.dart';
-
-final player = AudioPlayer();
 
 final List<Bus> busList = createBus();
 
