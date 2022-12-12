@@ -96,7 +96,8 @@ List<Bus> createBus() {
   Bus busY49 = Bus(
       title: "Y49 IP Prospect Flyer",
       alert: "Delayed 5 minutes\nNot crowded\n"
-          "Smithfield St at Fifth Ave is temporarily out of service. New stop at Smithfield St + Forbes Ave",
+          "Smithfield St at Fifth Ave is temporarily out of service."
+          "\nNew stop at Smithfield St + Forbes Ave",
       arrivalTime: "Arrives in 30 minutes",
       source: "Wood St",
       destination: "CCAC South",
