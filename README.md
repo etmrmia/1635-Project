@@ -25,7 +25,7 @@ To view the additional bus line information, tap on a bus line from the list in 
 
 # Changes Made
 ### Data:
-Originally, data was going to be represented in JSON format in an assets folder. This data would be parsed in model classes and fetched by view models via futures. The team decided to just represent our data in the model to save time.
+Originally, data was going to be represented in JSON format in an assets folder. This data would be parsed in model classes and fetched by view models via futures. The team decided to just represent our data in the model as apart of design simplification.
 
 ### Models and View Models:
 We planned to give each screen its own model and view model, but we chose to consolidate those classes into one model and one view model as part of design simplification. Again, our model class contains the data itself and does not manipulate it in any way. The view model still consists of mostly the same functions as those presented in the architectural diagram and in the demo.
