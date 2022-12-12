@@ -6,8 +6,6 @@ class Bus {
       destination,
       homeBusImage,
       routeBusImage;
-  String stopChange = "";
-  // Routes route;
   List<String> directions = []; //walking directions to bus stop
   List<String> times = [];
 
