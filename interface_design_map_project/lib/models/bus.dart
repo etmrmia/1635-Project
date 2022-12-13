@@ -30,7 +30,7 @@ List<Bus> createBus() {
   //Parent persona
   Bus bus64 = Bus(
       title: "64 Lawrenceville",
-      alert: "On time\n" "Bus is 25 percent full",
+      alert: "On time\n" "Not crowded",
       arrivalTime: "Arrives in 20 minutes",
       source: "Arsenal Elementary",
       destination: "Bank of America",
@@ -49,7 +49,7 @@ List<Bus> createBus() {
 
   Bus busP68 = Bus(
       title: "P68 Braddock Hills Flyer",
-      alert: "On time \n" "Bus is overcrowded",
+      alert: "On time \n" "Overcrowded",
       arrivalTime: "Arrives in 20 minutes",
       source: "Art Institute",
       destination: "Monroeville Mall",
@@ -72,7 +72,7 @@ List<Bus> createBus() {
 
   Bus bus61C = Bus(
       title: "61C McKeesport",
-      alert: "Scheduled to arrive on time\nBus is slightly crowded",
+      alert: "On time\nSlightly crowded",
       arrivalTime: "Arrives in 1 minute.",
       source: "University of Pittsburgh",
       destination: "Kennywood",
@@ -126,7 +126,7 @@ List<Bus> createBus() {
 
   Bus bus82 = Bus(
       title: "82 Lincoln",
-      alert: "On time\n" "Bus is 10 percent full.",
+      alert: "On time\n" "Not crowded.",
       arrivalTime: "Arrives in 1 minute",
       source: "Market Square",
       destination: "Market District",
