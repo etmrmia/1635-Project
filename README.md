@@ -17,7 +17,14 @@ Group Members: Emma Tristano, Ariane Seymour, Janet Majekodunmi
 # How to Perform Tasks
 To view alerts for a particular bus line, tap the bus line from the list of bus lines in the Home View or the Favorites View or search for a route. The alerts box is located at the bottom of the new window opened.
 
-To schedule a trip based on origin and destination, enter the origin into the textfield on the Home View with the “Starting” label. Then, enter the destination into the text field below “Starting” that is labeled “Destination.” Once the user presses the enter key, they will be taken to a separate window that displays the bus line information for the route including the alert for the bus line and the directions the user should perform to reach their destination.
+To schedule a trip based on origin and destination, enter the origin into the textfield on the Home View with the “Starting” label. Then, enter the destination into the text field below “Starting” that is labeled “Destination.” Once the user presses the enter key, they will be taken to a separate window that displays the bus line information for the route including the alert for the bus line and the directions the user should perform to reach their destination. 
+The origin and destination pairs are as follows: 
+Bus 64: Arsenal Elementary to Bank of America
+Bus P68: Art Institute to Monroeville Mall
+Bus 61C: University of Pittsburgh to Kennywood
+Bus Y49: Wood St to CCAC South
+Bus 71A: Market District to 323 Negley Ave
+Bus 82: Market Square to Market District
 
 To view the favorites list, tap on the circular elevated button with a heart located on the top right of the Home View. A window will open that displays the current list of favorites. To add to the list, press the heart icons in the Home View of the bus lines to be added. If the heart is red, it is added to the list. In addition, the user can search for the bus line to add in the Favorites View. Enter the bus line in the text field labeled “Bus line” in the Favorites View. If the entered line is a valid bus line, it will be added to the list, and the line will be marked as favorited on the Home View.
 
